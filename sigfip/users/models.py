@@ -32,6 +32,7 @@ class User(AbstractUser):
     registration_number = CharField(_("Matricule"), blank=True, null=True, max_length=100)
     registration_date = DateField(_("Date d'entrée"), blank=True, null=True)
     cni = CharField(_("Numéro Carte d'identité"), blank=True, null=True, max_length=100)
+    retirement_age = IntegerField(_("Age de la retraite"), default=60)
 
     def full_name(self):
         return f'{self.name} {self.last_name}'
@@ -138,7 +139,8 @@ class Request(TimeStampedField):
     """
     Application for user to have a loan.
     """
-    amount = FloatField(_("Montant de la demande"))
+    amount_requested = FloatField(_("Montant demandé"))
+    amount_awarded = FloatField(_("Montant accordé"))
     date = DateField(_("Date de dépôt de la demande"))
     post_reference = CharField(_("Référence courier"), max_length=20)
     category = ForeignKey(
