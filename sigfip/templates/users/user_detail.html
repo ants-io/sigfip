@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% load static %} {% block title %}User:
 {{ object.username }}{% endblock %} {% block content %}
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-sm-12">
       <h2>{{ object.username }}</h2>
@@ -11,7 +11,6 @@
   </div>
 
   {% if object == request.user %}
-  <!-- Action buttons -->
   <div class="row">
     <div class="col-sm-12">
       <a
@@ -23,10 +22,87 @@
       <a class="btn btn-primary" href="{% url 'account_email' %}" role="button"
         >E-Mail</a
       >
-      <!-- Your Stuff: Custom user template urls -->
     </div>
   </div>
-  <!-- End Action buttons -->
   {% endif %}
+</div> -->
+<div class="wrapper">
+  <div class="banner">
+    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+    <div class="tabs">
+      <ul class="tabs__list">
+        <li class="tabs__item">
+          <a href="#infos" class="tabs__link">Informations Générales</a>
+        </li>
+        <li class="tabs__item tabs__item--active">
+          <a href="#requests" class="tabs__link">Demandes</a>
+        </li>
+        <li class="tabs__item">
+          <a href="#salaries" class="tabs__link">Salaires</a>
+        </li>
+      </ul>
+      <div class="tabs__content">
+        <div id="infos"></div>
+        <div id="requests tabs__content-active">
+          <a href="#" class="btn btn--success float-right btn-sm"
+            >Ajouter une demande</a
+          >
+          <br class="clearfix" />
+          <br />
+          <div id="modal">
+            <div class="modal__content">
+              <span class="modal__close"><i class="fa fa-close"></i></span>
+              <p>...</p>
+            </div>
+          </div>
+        </div>
+        <div id="salaries">
+          <!-- <a href="#" class="btn btn--success float-right btn-sm">Ajouter une demande</a>
+          <br class="clearfix" />
+          <br />
+          <table class="table_n m-t-15">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>f1</th>
+                <th>f2</th>
+                <th>...</th>
+                <th>f3</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>_</td>
+                <td>_</td>
+                <td>_</td>
+                <td>...</td>
+                <td>_</td>
+              </tr>
+              <tr>
+                <td>_</td>
+                <td>_</td>
+                <td>_</td>
+                <td>...</td>
+                <td>_</td>
+              </tr>
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="detail">
+    <h6 class="p-15">Informations Générales</h6>
+    <div class="filter__group p-15">
+      <ul class="filter__options-list">
+        <li class="filter__options-item">Nom: _</li>
+        <li class="filter__options-item">Prénom: _</li>
+        <li class="filter__options-item">Age: _</li>
+        <li class="filter__options-item">Montant pret accordé: _</li>
+        <li class="filter__options-item">Montant pret restant: _</li>
+        <li class="filter__options-item">Salaire: _</li>
+      </ul>
+    </div>
+  </div>
 </div>
 {% endblock content %}
