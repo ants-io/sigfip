@@ -26,9 +26,97 @@
   </div>
   {% endif %}
 </div> -->
+<div id="cs_modal" class="cs_modal">
+  <div class="cs_modal__content">
+    <div class="mdl__title">
+      <h4>
+        Demande de prêt {CATEGORY}
+        <i class="far fa-times-circle float-right"></i>
+      </h4>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="filter__group">
+          <label class="filter__group__label">Montant demandé</label>
+          <input
+            class="filter__group__field"
+            type="text"
+            name="post_reference"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="filter__group">
+          <label class="filter__group__label">Catégorie du prêt</label>
+          <select
+            class="filter__group__field"
+            type="text"
+            name="post_reference"
+          ></select>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="filter__group">
+          <label class="filter__group__label">Observations</label>
+          <textarea
+            class="filter__group__textarea"
+            type="text"
+            name="post_reference"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <table class="table_n m-t-15">
+          <thead>
+            <tr>
+              <th>Type de pièce</th>
+              <th>Nombre exigé</th>
+              <th>Nombre fournie</th>
+              <th>Référence</th>
+              <th>Date pièce</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>_</td>
+              <td>_</td>
+              <td>_</td>
+              <td>...</td>
+              <td>_</td>
+            </tr>
+            <tr>
+              <td>_</td>
+              <td>_</td>
+              <td>_</td>
+              <td>...</td>
+              <td>_</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br />
+      <hr />
+      <div class="col-sm-12 m-t-15">
+        <button
+          href="#"
+          class="btn btn--success float-right btn-sm m-l-15 fs-11"
+        >
+          ENREGISTRER LA DEMANDE
+        </button>
+        <button href="#" class="btn btn--danger float-right btn-sm fs-11">
+          ANNULER LES MODIFICATIONS
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="wrapper">
   <div class="banner">
-    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+    <h3 class="p-15">
+      {{ user.first_name }} {{ user.last_name }}
+      <small class="fs-11">(Agent: #0009)</small>
+    </h3>
     <div class="tabs">
       <ul class="tabs__list">
         <li class="tabs__item">
@@ -49,10 +137,201 @@
           >
           <br class="clearfix" />
           <br />
-          <div id="modal">
-            <div class="modal__content">
-              <span class="modal__close"><i class="fa fa-close"></i></span>
-              <p>...</p>
+          <div class="tree_holder">
+            <div class="tree_holder__menu">
+              <ul class="tree_holder__list">
+                <li
+                  class="tree_holder__item tree_holder__item_bt tree_holder__item--waiting"
+                >
+                  Demande de <b>prêt au logement</b>, <b>5 000 000 F CFA</b>
+                  <a class="float-right text-white" href="#"
+                    ><i class="fas fa-ellipsis-v"></i> Actions</a
+                  >
+                </li>
+                <li class="tree_holder__item tree_holder__item--success">
+                  Demande de {CATEGORY} | x xxx xxx F CFA | Status : {STATUS}
+                  <a class="float-right text-white" href="#"
+                    ><i class="fas fa-ellipsis-v"></i> Actions</a
+                  >
+                </li>
+                <li class="tree_holder__item tree_holder__item--success">
+                  Demande de {CATEGORY} | x xxx xxx F CFA | Status : {STATUS}
+                  <a class="float-right text-white" href="#"
+                    ><i class="fas fa-ellipsis-v"></i> Actions</a
+                  >
+                </li>
+                <li class="tree_holder__item tree_holder__item--success">
+                  Demande de {CATEGORY} | x xxx xxx F CFA | Status : {STATUS}
+                  <a class="float-right text-white" href="#"
+                    ><i class="fas fa-ellipsis-v"></i> Actions</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="tree_holder__detail">
+              <div class="row">
+                <div class="col-sm-12 m-t-15">
+                  <span class="badge badge-warning"
+                    >EN ATTENTE D'INSTRUCTION</span
+                  >
+                  <button
+                    href="#"
+                    class="btn btn--success float-right btn-sm m-l-15 fs-11"
+                  >
+                    ENREGISTRER LA DEMANDE
+                  </button>
+                  <button
+                    href="#"
+                    class="btn btn--danger float-right btn-sm fs-11"
+                  >
+                    ANNULER LES MODIFICATIONS
+                  </button>
+                </div>
+                <br />
+                <hr />
+                <hr />
+                <br />
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label">Montant demandé</label>
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label"
+                      >Montant du prêt accordé</label
+                    >
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label"
+                      >Montant à rembourser</label
+                    >
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label"
+                      >Nombre de mensualité</label
+                    >
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label"
+                      >D. Quotité: A / 3</label
+                    >
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label">Precompte</label>
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label">Date de dépot</label>
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label"
+                      >Date de traitement</label
+                    >
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div class="col-sm-12">
+                  <div class="filter__group">
+                    <label class="filter__group__label">Observations</label>
+                    <textarea
+                      class="filter__group__textarea"
+                      type="text"
+                      name="post_reference"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <table class="table_n m-t-15">
+                    <thead>
+                      <tr>
+                        <th>Type de pièce</th>
+                        <th>Nombre exigé</th>
+                        <th>Nombre fournie</th>
+                        <th>Référence</th>
+                        <th>Date pièce</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>_</td>
+                        <td>_</td>
+                        <td>_</td>
+                        <td>...</td>
+                        <td>_</td>
+                      </tr>
+                      <tr>
+                        <td>_</td>
+                        <td>_</td>
+                        <td>_</td>
+                        <td>...</td>
+                        <td>_</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -98,11 +377,27 @@
         <li class="filter__options-item">Nom: _</li>
         <li class="filter__options-item">Prénom: _</li>
         <li class="filter__options-item">Age: _</li>
-        <li class="filter__options-item">Montant pret accordé: _</li>
-        <li class="filter__options-item">Montant pret restant: _</li>
-        <li class="filter__options-item">Salaire: _</li>
+        <li class="filter__options-item">Corps: _</li>
+        <li class="filter__options-item">Grade: _</li>
+        <li class="filter__options-item">Ministère: _</li>
+        <li class="filter__options-item">Part à la retraite à: _</li>
+        <li class="filter__options-item">Salaire NET: _</li>
+        <li class="filter__options-item">Prêts anterieurs: _</li>
+        <li class="filter__options-item">Disponibilité: _</li>
+      </ul>
+    </div>
+    <br />
+    <h6 class="p-15">Informations Financières</h6>
+    <div class="filter__group p-15">
+      <ul class="filter__options-list">
+        <li class="filter__options-item">Montant plafond: _</li>
+        <li class="filter__options-item">Salaire NET: _</li>
+        <li class="filter__options-item">Prêts anterieurs: _</li>
+        <li class="filter__options-item">Disponibilité: _</li>
       </ul>
     </div>
   </div>
 </div>
 {% endblock content %}
+<!-- Modal -->
+{% block modal %} {% endblock modal%}
