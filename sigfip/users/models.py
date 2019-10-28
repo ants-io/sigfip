@@ -38,7 +38,7 @@ class User(AbstractUser):
         return f'{self.name} {self.last_name}'
 
     def get_absolute_url(self):
-        return reverse("users:detail", kwargs={"username": self.username})
+        return reverse("users:list:detail", kwargs={"username": self.username})
 
 
 class Salary(TimeStampedField):
@@ -65,7 +65,7 @@ class Corps(NameField):
     """
     Model that store all existing Corps in System.
     """
-    
+
     class Meta:
         verbose_name_plural = 'corps'
 
@@ -74,7 +74,7 @@ class Ministry(NameField):
     """
     Model that store all existing Corps in System.
     """
-    
+
     class Meta:
         verbose_name_plural = 'ministers'
 
@@ -84,7 +84,7 @@ class PayingOrg(NameField, TimeStampedField):
     Model that store all existing paying org in System, 
     where the related user get paid from.
     """
-    
+
     class Meta:
         verbose_name_plural = 'paying_orgs'
 
@@ -111,9 +111,9 @@ class AdditionalInformation(TimeStampedField):
 
     def __str__(self):
         return self.user.full_name
-    
+
     def get_absolute_url(self):
-        return reverse("users:detail", kwargs={"username": self.username})
+        return reverse("users:list:detail", kwargs={"username": self.username})
 
 
 class DocumentCategory(NameField, TimeStampedField):

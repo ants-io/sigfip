@@ -2,10 +2,10 @@
 
 # Urls
 
-- Create: `/a/corps/create/`
-- Read: `/a/corps/`
-- Update: `/a/corps/update/`
-- Delete: `/a/corps/delete/`
+- Create: `/corps/create/`
+- Read: `/corps/`
+- Update: `/corps/update/`
+- Delete: `/corps/delete/`
 
 # Views
 

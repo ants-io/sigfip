@@ -2,7 +2,7 @@ import pytest
 from django.conf import settings
 from django.test import RequestFactory
 
-from sigfip.users.views import UserRedirectView, UserUpdateView
+from sigfip.users.views.users import UserRedirectView, UserUpdateView
 
 pytestmark = pytest.mark.django_db
 

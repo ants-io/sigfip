@@ -1,36 +1,403 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block title %}User: {{ object.username }}{% endblock %}
-
-{% block content %}
-<div class="container">
-
+{% extends "base.html" %} {% load static %} {% block title %}User:
+{{ object.username }}{% endblock %} {% block content %}
+<!-- <div class="container">
   <div class="row">
     <div class="col-sm-12">
-
       <h2>{{ object.username }}</h2>
       {% if object.name %}
-        <p>{{ object.name }}</p>
+      <p>{{ object.name }}</p>
       {% endif %}
     </div>
   </div>
 
-{% if object == request.user %}
-<!-- Action buttons -->
-<div class="row">
-
-  <div class="col-sm-12">
-    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
-    <!-- Your Stuff: Custom user template urls -->
+  {% if object == request.user %}
+  <div class="row">
+    <div class="col-sm-12">
+      <a
+        class="btn btn-primary"
+        href="{% url 'users:list:update' %}"
+        role="button"
+        >My Info</a
+      >
+      <a class="btn btn-primary" href="{% url 'account_email' %}" role="button"
+        >E-Mail</a
+      >
+    </div>
   </div>
-
+  {% endif %}
+</div> -->
+<div id="cs_modal" class="cs_modal">
+  <div class="cs_modal__content">
+    <div class="mdl__title">
+      <h4>
+        Demande de prêt {CATEGORY}
+        <i class="far fa-times-circle float-right"></i>
+      </h4>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="filter__group">
+          <label class="filter__group__label">Montant demandé</label>
+          <input
+            class="filter__group__field"
+            type="text"
+            name="post_reference"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="filter__group">
+          <label class="filter__group__label">Catégorie du prêt</label>
+          <select
+            class="filter__group__field"
+            type="text"
+            name="post_reference"
+          ></select>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="filter__group">
+          <label class="filter__group__label">Observations</label>
+          <textarea
+            class="filter__group__textarea"
+            type="text"
+            name="post_reference"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <table class="table_n m-t-15">
+          <thead>
+            <tr>
+              <th>Type de pièce</th>
+              <th>Nombre exigé</th>
+              <th>Nombre fournie</th>
+              <th>Référence</th>
+              <th>Date pièce</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>_</td>
+              <td>_</td>
+              <td>_</td>
+              <td>...</td>
+              <td>_</td>
+            </tr>
+            <tr>
+              <td>_</td>
+              <td>_</td>
+              <td>_</td>
+              <td>...</td>
+              <td>_</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br />
+      <hr />
+      <div class="col-sm-12 m-t-15">
+        <button
+          href="#"
+          class="btn btn--success float-right btn-sm m-l-15 fs-11"
+        >
+          ENREGISTRER LA DEMANDE
+        </button>
+        <button href="#" class="btn btn--danger float-right btn-sm fs-11">
+          ANNULER LES MODIFICATIONS
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- End Action buttons -->
-{% endif %}
-
-
+<div class="wrapper">
+  <div class="banner">
+    <h3 class="p-15">
+      {{ user.first_name }} {{ user.last_name }}
+      <small class="fs-11">(Agent: #0009)</small>
+    </h3>
+    <div class="tabs">
+      <ul class="tabs__list">
+        <li class="tabs__item">
+          <a href="#infos" class="tabs__link">Informations Générales</a>
+        </li>
+        <li class="tabs__item tabs__item--active">
+          <a href="#requests" class="tabs__link">Demandes</a>
+        </li>
+        <li class="tabs__item">
+          <a href="#salaries" class="tabs__link">Salaires</a>
+        </li>
+      </ul>
+      <div class="tabs__content">
+        <div id="infos"></div>
+        <div id="requests tabs__content-active">
+          <a href="#" class="btn btn--success float-right btn-sm"
+            >Ajouter une demande</a
+          >
+          <br class="clearfix" />
+          <br />
+          <div class="tree_holder">
+            <div class="tree_holder__menu">
+              <ul class="tree_holder__list">
+                <li
+                  class="tree_holder__item tree_holder__item_bt tree_holder__item--waiting"
+                >
+                  Demande de <b>prêt au logement</b>, <b>5 000 000 F CFA</b>
+                  <a class="float-right text-white" href="#"
+                    ><i class="fas fa-ellipsis-v"></i> Actions</a
+                  >
+                </li>
+                <li class="tree_holder__item tree_holder__item--success">
+                  Demande de {CATEGORY} | x xxx xxx F CFA | Status : {STATUS}
+                  <a class="float-right text-white" href="#"
+                    ><i class="fas fa-ellipsis-v"></i> Actions</a
+                  >
+                </li>
+                <li class="tree_holder__item tree_holder__item--success">
+                  Demande de {CATEGORY} | x xxx xxx F CFA | Status : {STATUS}
+                  <a class="float-right text-white" href="#"
+                    ><i class="fas fa-ellipsis-v"></i> Actions</a
+                  >
+                </li>
+                <li class="tree_holder__item tree_holder__item--success">
+                  Demande de {CATEGORY} | x xxx xxx F CFA | Status : {STATUS}
+                  <a class="float-right text-white" href="#"
+                    ><i class="fas fa-ellipsis-v"></i> Actions</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="tree_holder__detail">
+              <div class="row">
+                <div class="col-sm-12 m-t-15">
+                  <span class="badge badge-warning"
+                    >EN ATTENTE D'INSTRUCTION</span
+                  >
+                  <button
+                    href="#"
+                    class="btn btn--success float-right btn-sm m-l-15 fs-11"
+                  >
+                    ENREGISTRER LA DEMANDE
+                  </button>
+                  <button
+                    href="#"
+                    class="btn btn--danger float-right btn-sm fs-11"
+                  >
+                    ANNULER LES MODIFICATIONS
+                  </button>
+                </div>
+                <br />
+                <hr />
+                <hr />
+                <br />
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label">Montant demandé</label>
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label"
+                      >Montant du prêt accordé</label
+                    >
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label"
+                      >Montant à rembourser</label
+                    >
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label"
+                      >Nombre de mensualité</label
+                    >
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label"
+                      >D. Quotité: A / 3</label
+                    >
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label">Precompte</label>
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label">Date de dépot</label>
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="filter__group">
+                    <label class="filter__group__label"
+                      >Date de traitement</label
+                    >
+                    <input
+                      disabled
+                      class="filter__group__field"
+                      type="text"
+                      name="post_reference"
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div class="col-sm-12">
+                  <div class="filter__group">
+                    <label class="filter__group__label">Observations</label>
+                    <textarea
+                      class="filter__group__textarea"
+                      type="text"
+                      name="post_reference"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <table class="table_n m-t-15">
+                    <thead>
+                      <tr>
+                        <th>Type de pièce</th>
+                        <th>Nombre exigé</th>
+                        <th>Nombre fournie</th>
+                        <th>Référence</th>
+                        <th>Date pièce</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>_</td>
+                        <td>_</td>
+                        <td>_</td>
+                        <td>...</td>
+                        <td>_</td>
+                      </tr>
+                      <tr>
+                        <td>_</td>
+                        <td>_</td>
+                        <td>_</td>
+                        <td>...</td>
+                        <td>_</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="salaries">
+          <!-- <a href="#" class="btn btn--success float-right btn-sm">Ajouter une demande</a>
+          <br class="clearfix" />
+          <br />
+          <table class="table_n m-t-15">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>f1</th>
+                <th>f2</th>
+                <th>...</th>
+                <th>f3</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>_</td>
+                <td>_</td>
+                <td>_</td>
+                <td>...</td>
+                <td>_</td>
+              </tr>
+              <tr>
+                <td>_</td>
+                <td>_</td>
+                <td>_</td>
+                <td>...</td>
+                <td>_</td>
+              </tr>
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="detail">
+    <h6 class="p-15">Informations Générales</h6>
+    <div class="filter__group p-15">
+      <ul class="filter__options-list">
+        <li class="filter__options-item">Nom: _</li>
+        <li class="filter__options-item">Prénom: _</li>
+        <li class="filter__options-item">Age: _</li>
+        <li class="filter__options-item">Corps: _</li>
+        <li class="filter__options-item">Grade: _</li>
+        <li class="filter__options-item">Ministère: _</li>
+        <li class="filter__options-item">Part à la retraite à: _</li>
+        <li class="filter__options-item">Salaire NET: _</li>
+        <li class="filter__options-item">Prêts anterieurs: _</li>
+        <li class="filter__options-item">Disponibilité: _</li>
+      </ul>
+    </div>
+    <br />
+    <h6 class="p-15">Informations Financières</h6>
+    <div class="filter__group p-15">
+      <ul class="filter__options-list">
+        <li class="filter__options-item">Montant plafond: _</li>
+        <li class="filter__options-item">Salaire NET: _</li>
+        <li class="filter__options-item">Prêts anterieurs: _</li>
+        <li class="filter__options-item">Disponibilité: _</li>
+      </ul>
+    </div>
+  </div>
 </div>
 {% endblock content %}
-
+<!-- Modal -->
+{% block modal %} {% endblock modal%}

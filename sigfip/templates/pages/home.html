@@ -1,1 +1,243 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div class="wrapper">
+  <div class="search">
+    <h2 class="search__title">Recherche Par {CATEGORY}</h2>
+
+    <div class="search__form">
+      <div class="search__input w-30">
+        <input
+          type="text"
+          class="search__control query"
+          name="q"
+          placeholder="Recheche (saisissez Matricule, Nom, Prenom, Ministere, Corps, ...) "
+        />
+        <a href="#" class="float-right"
+          ><i class="fa fa-plus"></i> Plus d'options</a
+        >
+      </div>
+      <div class="search__input">
+        <input
+          type="text"
+          class="search__control"
+          name="dates_interval"
+          placeholder="Créé entre"
+        />
+      </div>
+      <div class="search__input">
+        <select class="search__control" name="category">
+          <option value=""></option>
+          <option selected value="00">{CATEGORY}</option>
+          <option value="0">Par Agent</option>
+          <option value="1">Par demande</option>
+          <option value="2">Par limite d'âge</option>
+        </select>
+      </div>
+      <button class="search__action btn btn-sm btn--success">
+        Ajouter {CATEGORY}
+      </button>
+    </div>
+
+    <div class="result">
+      <table class="result__table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>f1</th>
+            <th>f2</th>
+            <th>...</th>
+            <th>f3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>_</td>
+            <td>_</td>
+            <td>_</td>
+            <td>...</td>
+            <td>_</td>
+          </tr>
+          <tr>
+            <td>_</td>
+            <td>_</td>
+            <td>_</td>
+            <td>...</td>
+            <td>_</td>
+          </tr>
+          <tr>
+            <td>_</td>
+            <td>_</td>
+            <td>_</td>
+            <td>...</td>
+            <td>_</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="filter">
+    <div class="tabs">
+      <ul class="tabs__list">
+        <li class="tabs__item tabs__item--active">
+          <a href="#" class="tabs__link">FILTRE</a>
+        </li>
+      </ul>
+      <div class="tabs__content">
+        <div class="filter__group">
+          <label class="filter__group__label">Age compris</label>
+          <i class="fas fa-chevron-down float-right"></i>
+          <div class="filter__groups">
+            <div class="filter__group no-borders">
+              <label class="filter__group__label" for="">Entre</label>
+              <input
+                class="filter__group__field int"
+                type="text"
+                name="age_start"
+              />
+            </div>
+            <div class="filter__group no-borders">
+              <label class="filter__group__label" for="">Et</label>
+              <input
+                class="filter__group__field int"
+                type="text"
+                name="age_end"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="filter__group">
+          <label class="filter__group__label">Par Profession</label>
+          <i class="fas fa-chevron-down float-right"></i>
+          <ul class="filter__options-list">
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> P 1
+            </li>
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> P 2
+            </li>
+          </ul>
+        </div>
+        <div class="filter__group">
+          <label class="filter__group__label">Par Corps</label>
+          <ul class="filter__options-list">
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> P 1
+            </li>
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> P 2
+            </li>
+          </ul>
+        </div>
+        <div class="filter__group">
+          <label class="filter__group__label">Par Grade</label>
+          <ul class="filter__options-list">
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> P 1
+            </li>
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> P 2
+            </li>
+          </ul>
+        </div>
+        <div class="filter__group">
+          <label class="filter__group__label">Par Ministère</label>
+          <ul class="filter__options-list">
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> P 1
+            </li>
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> P 2
+            </li>
+          </ul>
+        </div>
+        <div class="filter__group">
+          <label class="filter__group__label">Par Organisme payeur</label>
+          <ul class="filter__options-list">
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> P 1
+            </li>
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> P 2
+            </li>
+          </ul>
+        </div>
+
+        <h6 class="section__separator">Critère sur demande</h6>
+
+        <div class="filter__group">
+          <label class="filter__group__label">Référence courier</label>
+          <input
+            class="filter__group__field"
+            type="text"
+            name="post_reference"
+          />
+        </div>
+        <div class="filter__group">
+          <label class="filter__group__label">Convention</label>
+          <input
+            class="filter__group__field"
+            type="text"
+            name="post_reference"
+          />
+        </div>
+        <div class="filter__group">
+          <label class="filter__group__label">Déposée</label>
+          <div class="filter__groups">
+            <div class="filter__group no-borders">
+              <label class="filter__group__label" for="">Après le</label>
+              <input
+                class="filter__group__field"
+                type="text"
+                name="age_start"
+              />
+            </div>
+            <div class="filter__group no-borders">
+              <label class="filter__group__label" for="">Avant le</label>
+              <input class="filter__group__field" type="text" name="age_end" />
+            </div>
+          </div>
+        </div>
+        <div class="filter__group">
+          <label class="filter__groupulabel">Traitée</label>
+          <div class="filter__groups">
+            <div class="filter__group no-borders">
+              <label class="filter__group__label" for="">Après le</label>
+              <input
+                class="filter__group__field"
+                type="text"
+                name="age_start"
+              />
+            </div>
+            <div class="filter__group no-borders">
+              <label class="filter__group__label" for="">Avant le</label>
+              <input class="filter__group__field" type="text" name="age_end" />
+            </div>
+          </div>
+        </div>
+        <div class="filter__group">
+          <label class="filter__groupulabel">Par Status</label>
+          <ul class="filter__options-list">
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> Traitées
+            </li>
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> Gelées
+            </li>
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> Non traitées
+            </li>
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> Acceptées
+            </li>
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> Refusées
+            </li>
+            <li class="filter__options-item">
+              <input type="checkbox" name="metier" /> Tout
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

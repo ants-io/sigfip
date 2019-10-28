@@ -10,7 +10,7 @@ class NameField(models.Model):
     This abstract model will be inherited by all model which have name and description fields.
     """
 
-    name = CharField(_("Nom"), max_length=20)
+    name = CharField(_("Nom"), max_length=255)
     description = TextField(_("Description"))
 
     class Meta:
