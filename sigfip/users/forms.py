@@ -48,11 +48,34 @@ class SalaryModelForm(forms.ModelForm):
 
 class CorpsModelForm(mixins.NameFormFields):
 
-    class Meta:
+    class Meta(mixins.NameFormFields.Meta):
 
         model = models.Corps
-        fields = ['name', 'description']
-        widgets = {
-            'name': TextInput(),
-            'description': Textarea(),
-        }
+
+
+class MinistryModelForm(mixins.NameFormFields):
+
+    class Meta(mixins.NameFormFields.Meta):
+
+        model = models.Corps
+
+
+class PayingOrgModelForm(mixins.NameFormFields):
+
+    class Meta(mixins.NameFormFields.Meta):
+
+        model = models.PayingOrg
+
+
+class DocumentCategoryModelForm(mixins.NameFormFields):
+
+    class Meta(mixins.NameFormFields.Meta):
+
+        model = models.DocumentCategory
+
+
+class RequestCategoryModelForm(mixins.NameFormFields):
+
+    class Meta(mixins.NameFormFields.Meta):
+
+        model = models.RequestCategory

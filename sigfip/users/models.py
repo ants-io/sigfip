@@ -120,6 +120,7 @@ class DocumentCategory(NameField, TimeStampedField):
     """
     All Document categories. (CNI, Passport, 'Birth act', ...)
     """
+    required_number = IntegerField(_("Nombre exigé"), default=1)
 
     class Meta:
         verbose_name_plural = 'document_categories'
@@ -158,8 +159,10 @@ class Document(TimeStampedField):
     """
     Document given by user to apply for a loan.
     """
-    physical_document = FileField(_("Document"))
-    reference = ForeignKey(
+    physical_document = FileField(_("Document"), blank=True, null=True)
+    required_number = IntegerField(_("Nombre exigé"), default=0)
+    reference = CharField(_("Nombre exigé"), max_length=255, blank=True, null=True)
+    document_category = ForeignKey(
         DocumentCategory,
         verbose_name=_("Document de reference"),
         on_delete=models.CASCADE)

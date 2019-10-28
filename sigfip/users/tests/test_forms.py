@@ -5,9 +5,13 @@ from django.test import TestCase
 import pytest
 
 from sigfip.users.forms import (
-    UserCreationForm,
+    CorpsModelForm,
+    DocumentCategoryModelForm,
+    MinistryModelForm,
+    PayingOrgModelForm,
     SalaryModelForm,
-    CorpsModelForm
+    RequestCategoryModelForm,
+    UserCreationForm,
 )
 from sigfip.users.tests.factories import UserFactory
 
@@ -97,9 +101,112 @@ class TestCorpsModelForm(TestCase):
             'name': "ADMINISTRATION PENITENTIAIRE",
             'description': "_"
         })
-        print("form.errors = ", form.errors)
         self.assertTrue(form.is_valid())
 
         corps = form.save()
         self.assertEqual(corps.name, "ADMINISTRATION PENITENTIAIRE")
         self.assertEqual(corps.description, "_")
+
+
+class TestMinistryModelForm(TestCase):
+
+    def setUp(self):
+        self.user = UserFactory()
+
+    def test_blank_data(self):
+        form = MinistryModelForm({})
+
+        self.assertFalse(form.is_valid())
+        self.assertDictEqual(form.errors, {
+            'name': ['This field is required.'],
+            'description': ['This field is required.'],
+        })
+
+    def test_valid_data(self):
+        form = MinistryModelForm({
+            'name': "Ministère de l'économie et des finances",
+            'description': "_"
+        })
+        self.assertTrue(form.is_valid())
+
+        Ministry = form.save()
+        self.assertEqual(Ministry.name, "Ministère de l'économie et des finances")
+        self.assertEqual(Ministry.description, "_")
+
+
+class TestPayingOrgModelForm(TestCase):
+
+    def setUp(self):
+        self.user = UserFactory()
+
+    def test_blank_data(self):
+        form = PayingOrgModelForm({})
+
+        self.assertFalse(form.is_valid())
+        self.assertDictEqual(form.errors, {
+            'name': ['This field is required.'],
+            'description': ['This field is required.'],
+        })
+
+    def test_valid_data(self):
+        form = PayingOrgModelForm({
+            'name': "Paying org I",
+            'description': "_"
+        })
+        self.assertTrue(form.is_valid())
+
+        PayingOrg = form.save()
+        self.assertEqual(PayingOrg.name, "Paying org I")
+        self.assertEqual(PayingOrg.description, "_")
+
+
+class TestRequestCategoryModelForm(TestCase):
+
+    def setUp(self):
+        self.user = UserFactory()
+
+    def test_blank_data(self):
+        form = RequestCategoryModelForm({})
+
+        self.assertFalse(form.is_valid())
+        self.assertDictEqual(form.errors, {
+            'name': ['This field is required.'],
+            'description': ['This field is required.'],
+        })
+
+    def test_valid_data(self):
+        form = RequestCategoryModelForm({
+            'name': "Demande de prêt au logement",
+            'description': "_"
+        })
+        self.assertTrue(form.is_valid())
+
+        RequestCategory = form.save()
+        self.assertEqual(RequestCategory.name, "Demande de prêt au logement")
+        self.assertEqual(RequestCategory.description, "_")
+
+
+class TestDocumentCategoryModelForm(TestCase):
+
+    def setUp(self):
+        self.user = UserFactory()
+
+    def test_blank_data(self):
+        form = DocumentCategoryModelForm({})
+
+        self.assertFalse(form.is_valid())
+        self.assertDictEqual(form.errors, {
+            'name': ['This field is required.'],
+            'description': ['This field is required.'],
+        })
+
+    def test_valid_data(self):
+        form = DocumentCategoryModelForm({
+            'name': "Bulletin de solde",
+            'description': "_"
+        })
+        self.assertTrue(form.is_valid())
+
+        DocumentCategory = form.save()
+        self.assertEqual(DocumentCategory.name, "Bulletin de solde")
+        self.assertEqual(DocumentCategory.description, "_")
