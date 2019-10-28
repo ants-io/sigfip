@@ -318,6 +318,118 @@
   background-color: #17a2b8;
 }
 /* End Double view */
+
+/* Calendar Module */
+calendar {
+  margin-top: 10px;
+  position: absolute;
+  z-index: 1000000000;
+  border: 1px solid #a3a3a3;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.48);
+  border-radius: 5px !important;
+  background-color: #fff;
+}
+
+.calendar:before {
+  border: solid transparent;
+  content: '' !important;
+  display: block !important;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  border-width: 10px;
+  margin-top: -21px;
+  border-bottom-color: #a3a3a3;
+  margin-left: -15px;
+}
+
+.calendar__month {
+}
+
+.calendar__header {
+  background-color: #f5f5f5;
+
+  border-radius: 5px 5px 0 0;
+  border-bottom: 1px solid #efefef;
+}
+
+.calendar__btn__next {
+  float: right;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: #f5f5f5 url(//cdn.teamwork.com/images/newui/dp_next.png) no-repeat
+    0 50%;
+  cursor: pointer;
+  margin: 10px 12px 10px 0;
+}
+
+.calendar__btn__previous {
+  float: left;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: #f5f5f5 url(//cdn.teamwork.com/images/newui/dp_prev.png) no-repeat
+    0 50%;
+  cursor: pointer;
+  margin: 10px 0 10px 12px;
+}
+
+.calendar__title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #373737;
+  padding: 10px 0 40px;
+}
+
+.calendar__table {
+  border-collapse: separate;
+  padding: 0 10px 5px;
+  margin-top: -20px;
+  margin-bottom: 30px;
+}
+
+.calendar__table thead th {
+  text-transform: uppercase;
+  color: #cacaca;
+  padding: 3px;
+  text-align: center;
+  font-size: 10px;
+  padding-bottom: 10px;
+}
+
+.calendar__table td {
+  cursor: pointer;
+  text-align: center;
+  font-weight: 400;
+  font-size: 11px;
+  font-weight: 400;
+  color: #646464;
+  width: 24px;
+  height: 20px;
+}
+
+.calendar__input {
+  width: 170px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  font-size: 13px;
+  padding: 5px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: #fff;
+  background-image: none;
+  line-height: 1.42857;
+}
+
+td.day--selected {
+  background-color: #609ad9;
+  color: #fff;
+}
+
+/* End Calendar Module */
+
 .fs-11 {
   font-size: 11px;
 }
