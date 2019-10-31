@@ -118,9 +118,13 @@ class DocumentCategoryModelForm(mixins.NameFormFields):
 
     class Meta(mixins.NameFormFields.Meta):
 
+        fields = '__all__'
         model = models.DocumentCategory
         widgets = {
             'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'required_number': forms.TextInput(attrs={
                 'class': 'filter__group__field'
             }),
             'description': forms.Textarea(attrs={

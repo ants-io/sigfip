@@ -13,13 +13,19 @@
       >
     </li>
     <li class="aside__item">
-      <a href="" class="aside__link">Organismes payeur</a>
+      <a href="{% url 'app:paying_orgs:list' %}" class="aside__link"
+        >Organismes payeur</a
+      >
     </li>
     <li class="aside__item">
-      <a href="" class="aside__link">Catégories de demande</a>
+      <a href="{% url 'app:request_categories:list' %}" class="aside__link"
+        >Catégories de demande</a
+      >
     </li>
     <li class="aside__item">
-      <a href="" class="aside__link">Catégories de document</a>
+      <a href="{% url 'app:document_categories:list' %}" class="aside__link"
+        >Catégories de document</a
+      >
     </li>
   </ul>
 </div>

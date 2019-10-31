@@ -9,6 +9,9 @@ from sigfip.users.views.users import (
 from .views import corps as corps_views
 from .views import grades as grades_views
 from .views import ministers as ministers_views
+from .views import paying_orgs as paying_orgs_views
+from .views import request_category as request_category_views
+from .views import document_category as document_category_views
 
 app_name = "app"
 users_urlpatterns = [
@@ -38,9 +41,33 @@ ministers_urlpatterns = [
     path("<int:pk>/delete/", view=ministers_views.ministers_delete_view, name="delete"),
 ]
 
+paying_orgs_urlpatterns = [
+    path("list/", view=paying_orgs_views.paying_orgs_list_view, name="list"),
+    path("create/", view=paying_orgs_views.paying_orgs_create_view, name="create"),
+    path("<int:pk>/update/", view=paying_orgs_views.paying_orgs_update_view, name="update"),
+    path("<int:pk>/delete/", view=paying_orgs_views.paying_orgs_delete_view, name="delete"),
+]
+
+request_categories_urlpatterns = [
+    path("list/", view=request_category_views.request_categories_list_view, name="list"),
+    path("create/", view=request_category_views.request_categories_create_view, name="create"),
+    path("<int:pk>/update/", view=request_category_views.request_categories_update_view, name="update"),
+    path("<int:pk>/delete/", view=request_category_views.request_categories_delete_view, name="delete"),
+]
+
+document_categories_urlpatterns = [
+    path("list/", view=document_category_views.document_categories_list_view, name="list"),
+    path("create/", view=document_category_views.document_categories_create_view, name="create"),
+    path("<int:pk>/update/", view=document_category_views.document_categories_update_view, name="update"),
+    path("<int:pk>/delete/", view=document_category_views.document_categories_delete_view, name="delete"),
+]
+
 urlpatterns = [
     path(r'users/', include((users_urlpatterns, app_name), namespace='users')),
     path(r'corps/', include((corps_urlpatterns, app_name), namespace='corps')),
     path(r'grades/', include((grades_urlpatterns, app_name), namespace='grades')),
     path(r'ministers/', include((ministers_urlpatterns, app_name), namespace='ministers')),
+    path(r'paying-orgs/', include((paying_orgs_urlpatterns, app_name), namespace='paying_orgs')),
+    path(r'request-categories/', include((request_categories_urlpatterns, app_name), namespace='request_categories')),
+    path(r'document-categories/', include((document_categories_urlpatterns, app_name), namespace='document_categories')),
 ]
