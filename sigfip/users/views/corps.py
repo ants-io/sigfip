@@ -14,7 +14,12 @@ class CorpMixin(mixins.PageMixin):
             'create': 'app:corps:create',
             'update': 'app:corps:update',
             'delete': 'app:corps:delete',
-        }
+            'list': 'app:corps:list',
+        },
+        'field_list': [
+            {'name': 'name', 'label': 'Nom'},
+            {'name': 'description', 'label': 'Description'}
+        ]
     }
 
 
@@ -47,7 +52,7 @@ class CorpsUpdateView(LoginRequiredMixin, UpdateView):
 corps_update_view = CorpsUpdateView.as_view()
 
 
-class CorpsDeleteView(LoginRequiredMixin, DeleteView):
+class CorpsDeleteView(LoginRequiredMixin, CorpMixin, DeleteView):
 
     model = Corps
     success_url = reverse_lazy('app:corps:list')

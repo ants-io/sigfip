@@ -70,6 +70,18 @@ class Corps(NameField):
         verbose_name_plural = 'corps'
 
 
+class Grade(NameField):
+    """
+    Model that store all existing Grades in System.
+    """
+
+    retired_to = IntegerField(_("Retraité à"))
+    corps = ForeignKey(Corps, verbose_name=_("Corps"), on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = 'grades'
+
+
 class Ministry(NameField):
     """
     Model that store all existing Corps in System.
@@ -100,8 +112,8 @@ class AdditionalInformation(TimeStampedField):
     address = TextField(_("Adresse"))
     postal_box = CharField(_("Boite postale"), max_length=20)
     phone = CharField(_("Mobile / Téléphone"), max_length=20)
-    corps = ForeignKey(
-        Corps, verbose_name=_("Corps"), on_delete=models.CASCADE)
+    grade = ForeignKey(
+        Grade, verbose_name=_("Grade"), on_delete=models.CASCADE)
     ministry = ForeignKey(
         Ministry, verbose_name=_("Ministère"), on_delete=models.CASCADE)
     paying_org = ForeignKey(

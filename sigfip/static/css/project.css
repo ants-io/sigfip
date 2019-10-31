@@ -102,14 +102,14 @@
 .result__table th,
 .table_n th {
   padding: 5px;
-
+  text-align: center;
   border: 3px #eee solid;
 }
 
 .result__table td,
 .table_n td {
+  text-align: center;
   padding: 5px;
-
   border-left: 3px #eee solid;
 }
 .table_n tr {

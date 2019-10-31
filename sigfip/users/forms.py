@@ -61,11 +61,42 @@ class CorpsModelForm(mixins.NameFormFields):
         }
 
 
+class GradeModelForm(mixins.NameFormFields):
+
+    class Meta(mixins.NameFormFields.Meta):
+
+        model = models.Grade
+        fields = '__all__'
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'retired_to': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea',
+                'rows': 3
+            }),
+            'corps': forms.Select(attrs={
+                'class': 'filter__group__field'
+            })
+        }
+
+
 class MinistryModelForm(mixins.NameFormFields):
 
     class Meta(mixins.NameFormFields.Meta):
 
-        model = models.Corps
+        model = models.Ministry
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea'
+            })
+        }
 
 
 class PayingOrgModelForm(mixins.NameFormFields):
@@ -73,6 +104,14 @@ class PayingOrgModelForm(mixins.NameFormFields):
     class Meta(mixins.NameFormFields.Meta):
 
         model = models.PayingOrg
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea'
+            })
+        }
 
 
 class DocumentCategoryModelForm(mixins.NameFormFields):
@@ -80,6 +119,14 @@ class DocumentCategoryModelForm(mixins.NameFormFields):
     class Meta(mixins.NameFormFields.Meta):
 
         model = models.DocumentCategory
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea'
+            })
+        }
 
 
 class RequestCategoryModelForm(mixins.NameFormFields):
@@ -87,3 +134,11 @@ class RequestCategoryModelForm(mixins.NameFormFields):
     class Meta(mixins.NameFormFields.Meta):
 
         model = models.RequestCategory
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea'
+            })
+        }

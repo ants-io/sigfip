@@ -1,7 +1,8 @@
 class PageMixin(object):
     page = {
         'title': '',
-        'namespaces': {}
+        'namespaces': {},
+        'field_list': []
     }
 
     def get_page(self):
@@ -13,13 +14,17 @@ class PageMixin(object):
     def get_namespaces(self):
         return self.page['namespaces']
 
+    def get_page_field_list(self):
+        return self.page['field_list']
+
     def get_context_data(self, **kwargs):
         context = super(PageMixin, self).get_context_data(**kwargs)
 
         context.update({
             'page': {
                 'title': self.get_page_title(),
-                'namespaces': self.get_namespaces()
+                'namespaces': self.get_namespaces(),
+                'field_list': self.get_page_field_list()
             },
         })
 

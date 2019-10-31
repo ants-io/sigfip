@@ -2,7 +2,7 @@
 <!--  -->
 {% load static %}
 <!--  -->
-{% block title %}Administration: Corps{% endblock %}
+{% block title %}Administration: Grades{% endblock %}
 <!--  -->
 {% block content %}
 <div class="layout-v2">
@@ -11,15 +11,18 @@
   <div class="content">
     <div class="col-md-12">
       <h3 class="p-15">
-        Administration des corps
+        Administration des grades
         <small class="fs-11">
-          / {% if object %}Modifier{% else %}Ajouter{% endif %} un corps
+          / {% if object %}Modifier{% else %}Ajouter{% endif %} un grade
         </small>
       </h3>
     </div>
-    <div class="col-md-12 m-15">
-      {% include 'fragments/_confirm_delete.html' %}
+    <div class="col-md-12">
+      {% include 'fragments/_form.html' %}
     </div>
   </div>
 </div>
-{% endblock %}
+{% endblock content %}
+
+<!-- Modal -->
+{% block modal %} {% endblock modal%}
