@@ -38,7 +38,7 @@ class User(AbstractUser):
         return f'{self.name} {self.last_name}'
 
     def get_absolute_url(self):
-        return reverse("users:list:detail", kwargs={"username": self.username})
+        return reverse("app:users:detail", kwargs={"username": self.username})
 
 
 class Salary(TimeStampedField):
@@ -113,7 +113,7 @@ class AdditionalInformation(TimeStampedField):
         return self.user.full_name
 
     def get_absolute_url(self):
-        return reverse("users:list:detail", kwargs={"username": self.username})
+        return reverse("app:users:detail", kwargs={"username": self.username})
 
 
 class DocumentCategory(NameField, TimeStampedField):

@@ -7,17 +7,17 @@ pytestmark = pytest.mark.django_db
 
 def test_detail(user: settings.AUTH_USER_MODEL):
     assert (
-        reverse("users:list:detail", kwargs={"username": user.username})
+        reverse("app:users:detail", kwargs={"username": user.username})
         == f"/users/{user.username}/"
     )
-    assert resolve(f"/users/{user.username}/").view_name == "users:list:detail"
+    assert resolve(f"/users/{user.username}/").view_name == "app:users:detail"
 
 
 def test_update():
-    assert reverse("users:list:update") == "/users/~update/"
-    assert resolve("/users/~update/").view_name == "users:list:update"
+    assert reverse("app:users:update") == "/users/~update/"
+    assert resolve("/users/~update/").view_name == "app:users:update"
 
 
 def test_redirect():
-    assert reverse("users:list:redirect") == "/users/~redirect/"
-    assert resolve("/users/~redirect/").view_name == "users:list:redirect"
+    assert reverse("app:users:redirect") == "/users/~redirect/"
+    assert resolve("/users/~redirect/").view_name == "app:users:redirect"

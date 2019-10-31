@@ -51,6 +51,14 @@ class CorpsModelForm(mixins.NameFormFields):
     class Meta(mixins.NameFormFields.Meta):
 
         model = models.Corps
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea'
+            })
+        }
 
 
 class MinistryModelForm(mixins.NameFormFields):
