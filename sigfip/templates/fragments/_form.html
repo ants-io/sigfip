@@ -1,0 +1,17 @@
+<form action="" method="POST">
+  {% csrf_token %}
+  <!-- form fields -->
+  {% for field in form %}
+  <div class="col-sm-12">
+    <div class="filter__group">
+      <label class="filter__group__label" for="{{ field.id_for_label }}">
+        {{ field.label }}
+      </label>
+      {{ field }}
+    </div>
+  </div>
+  {% endfor %}
+  <button class="btn btn--success m-t-15 float-right" type="submit">
+    ENREGISTRER
+  </button>
+</form>

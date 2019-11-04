@@ -48,11 +48,138 @@ class SalaryModelForm(forms.ModelForm):
 
 class CorpsModelForm(mixins.NameFormFields):
 
-    class Meta:
+    class Meta(mixins.NameFormFields.Meta):
 
         model = models.Corps
-        fields = ['name', 'description']
         widgets = {
-            'name': TextInput(),
-            'description': Textarea(),
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea'
+            })
         }
+
+
+class GradeModelForm(mixins.NameFormFields):
+
+    class Meta(mixins.NameFormFields.Meta):
+
+        model = models.Grade
+        fields = '__all__'
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'retired_to': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea',
+                'rows': 3
+            }),
+            'corps': forms.Select(attrs={
+                'class': 'filter__group__field'
+            })
+        }
+
+
+class MinistryModelForm(mixins.NameFormFields):
+
+    class Meta(mixins.NameFormFields.Meta):
+
+        model = models.Ministry
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea'
+            })
+        }
+
+
+class PayingOrgModelForm(mixins.NameFormFields):
+
+    class Meta(mixins.NameFormFields.Meta):
+
+        model = models.PayingOrg
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea'
+            })
+        }
+
+
+class DocumentCategoryModelForm(mixins.NameFormFields):
+
+    class Meta(mixins.NameFormFields.Meta):
+
+        fields = '__all__'
+        model = models.DocumentCategory
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'required_number': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea'
+            })
+        }
+
+
+class RequestCategoryModelForm(mixins.NameFormFields):
+
+    class Meta(mixins.NameFormFields.Meta):
+
+        fields = '__all__'
+        model = models.RequestCategory
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'documents': forms.SelectMultiple(attrs={
+                'class': 'filter__group__textarea'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea',
+                'rows': '3'
+            })
+        }
+
+
+class LoanForm(ModelForm):
+
+    class Meta:
+
+        fields = [
+            'amount_requested',
+            'category',
+            'observations'
+        ]
+        model = models.Request
+        widgets = {
+            'amount_requested': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'category': forms.Select(attrs={
+                'class': 'filter__group__field'
+            }),
+            'observations': forms.Textarea(attrs={
+                'class': 'filter__group__textarea',
+                'rows': 2
+            })
+        }
+
+
+class DocumentForm(ModelForm):
+
+    class Meta:
+
+        fields = '__all__'
+        model = models.Document

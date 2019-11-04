@@ -68,8 +68,9 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "rest_framework",
     "django_celery_beat",
+    "django_filters",
+    "rest_framework",
 ]
 
 LOCAL_APPS = [
@@ -94,7 +95,7 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "users.User"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "users:list:redirect"
+LOGIN_REDIRECT_URL = "app:users:redirect"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 LOGIN_URL = "account_login"
 
@@ -287,5 +288,13 @@ SOCIALACCOUNT_ADAPTER = "sigfip.users.adapters.SocialAccountAdapter"
 # https://django-compressor.readthedocs.io/en/latest/quickstart/#installation
 INSTALLED_APPS += ["compressor"]
 STATICFILES_FINDERS += ["compressor.finders.CompressorFinder"]
+
+# Django rest framework
+# ------------------------------------------------------------------------------
+# https://www.django-rest-framework.org/
+# REST_FRAMEWORK = {
+#     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+# }
+
 # Your stuff...
 # ------------------------------------------------------------------------------

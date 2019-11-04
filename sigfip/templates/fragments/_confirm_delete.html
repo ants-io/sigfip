@@ -1,0 +1,14 @@
+<form method="post">
+  {% csrf_token %}
+  <p>
+    Etes vous sur de vouloir supprimer
+    <b
+      ><u>"{{ object }}"</u></b
+    >
+    ?
+  </p>
+  <a href="{% url page.namespaces.list %}"
+    ><i class="fas fa-long-arrow-alt-left"></i> Retour</a
+  >
+  <input type="submit" class="btn btn--danger" value="Confirmer" />
+</form>

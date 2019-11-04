@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block title %}Administration: Corps{% endblock %}
+<!--  -->
+{% block content %}
+<div class="layout-v2">
+  {% include 'fragments/_aside.html' %}
+
+  <div class="content">
+    <div class="col-md-12">
+      <h3 class="p-15">
+        Administration des corps
+        <small class="fs-11">
+          / {% if object %}Modifier{% else %}Ajouter{% endif %} un corps
+        </small>
+      </h3>
+    </div>
+    <div class="col-md-12">
+      {% include 'fragments/_form.html' %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+<!-- Modal -->
+{% block modal %} {% endblock modal%}

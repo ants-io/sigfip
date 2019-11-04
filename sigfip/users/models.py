@@ -15,6 +15,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from model_utils.models import StatusModel
+from model_utils.fields import StatusField
 from model_utils import Choices
 
 from .behaviours import (NameField, TimeStampedField)
@@ -33,12 +34,23 @@ class User(AbstractUser):
     registration_date = DateField(_("Date d'entrée"), blank=True, null=True)
     cni = CharField(_("Numéro Carte d'identité"), blank=True, null=True, max_length=100)
     retirement_age = IntegerField(_("Age de la retraite"), default=60)
+    address = TextField(_("Adresse"))
+    postal_box = CharField(_("Boite postale"), max_length=20)
+    phone = CharField(_("Mobile / Téléphone"), max_length=20)
+    grade = ForeignKey(
+        'Grade', verbose_name=_("Grade"), on_delete=models.CASCADE)
+    ministry = ForeignKey(
+        'Ministry', verbose_name=_("Ministère"), on_delete=models.CASCADE)
+    paying_org = ForeignKey(
+        'PayingOrg',
+        verbose_name=_("Organisme payeur"),
+        on_delete=models.CASCADE)
 
     def full_name(self):
         return f'{self.name} {self.last_name}'
 
     def get_absolute_url(self):
-        return reverse("users:list:detail", kwargs={"username": self.username})
+        return reverse("app:users:detail", kwargs={"username": self.username})
 
 
 class Salary(TimeStampedField):
@@ -70,6 +82,18 @@ class Corps(NameField):
         verbose_name_plural = 'corps'
 
 
+class Grade(NameField):
+    """
+    Model that store all existing Grades in System.
+    """
+
+    retired_to = IntegerField(_("Retraité à"))
+    corps = ForeignKey(Corps, verbose_name=_("Corps"), on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = 'grades'
+
+
 class Ministry(NameField):
     """
     Model that store all existing Corps in System.
@@ -89,37 +113,11 @@ class PayingOrg(NameField, TimeStampedField):
         verbose_name_plural = 'paying_orgs'
 
 
-class AdditionalInformation(TimeStampedField):
-    """
-    Additionnal informations for user.
-    """
-    user = OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        primary_key=True)
-    address = TextField(_("Adresse"))
-    postal_box = CharField(_("Boite postale"), max_length=20)
-    phone = CharField(_("Mobile / Téléphone"), max_length=20)
-    corps = ForeignKey(
-        Corps, verbose_name=_("Corps"), on_delete=models.CASCADE)
-    ministry = ForeignKey(
-        Ministry, verbose_name=_("Ministère"), on_delete=models.CASCADE)
-    paying_org = ForeignKey(
-        PayingOrg,
-        verbose_name=_("Organisme payeur"),
-        on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user.full_name
-
-    def get_absolute_url(self):
-        return reverse("users:list:detail", kwargs={"username": self.username})
-
-
 class DocumentCategory(NameField, TimeStampedField):
     """
     All Document categories. (CNI, Passport, 'Birth act', ...)
     """
+    required_number = IntegerField(_("Nombre exigé"), default=1)
 
     class Meta:
         verbose_name_plural = 'document_categories'
@@ -139,16 +137,19 @@ class Request(TimeStampedField):
     """
     Application for user to have a loan.
     """
+    STATUS_CHOICES = Choices('pending', 'accepted', 'archived', 'frozen', 'rejected')
+
     amount_requested = FloatField(_("Montant demandé"))
-    amount_awarded = FloatField(_("Montant accordé"))
-    date = DateField(_("Date de dépôt de la demande"))
-    post_reference = CharField(_("Référence courier"), max_length=20)
+    amount_awarded = FloatField(_("Montant accordé"), blank=True, null=True)
+    date = DateField(_("Date de dépôt de la demande"), blank=True, null=True)
+    post_reference = CharField(_("Référence courier"), max_length=20, blank=True, null=True)
     category = ForeignKey(
         RequestCategory,
         verbose_name=_("Catégorie de la demande"),
         on_delete=models.CASCADE)
     observations = TextField(_("Observations"), blank=True)
-    status = Choices('accepted', 'archived', 'frozen', 'rejected',)
+    status = StatusField(choices_name='STATUS_CHOICES')
+    user = ForeignKey(User, verbose_name=_("Agent"), on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['created_at']
@@ -158,8 +159,10 @@ class Document(TimeStampedField):
     """
     Document given by user to apply for a loan.
     """
-    physical_document = FileField(_("Document"))
-    reference = ForeignKey(
+    physical_document = FileField(_("Document"), blank=True, null=True)
+    provided_number = IntegerField(_("Nombre fourni"), default=0)
+    reference = CharField(_("Nombre exigé"), max_length=255, blank=True, null=True)
+    document_category = ForeignKey(
         DocumentCategory,
         verbose_name=_("Document de reference"),
         on_delete=models.CASCADE)

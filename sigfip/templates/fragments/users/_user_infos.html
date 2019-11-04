@@ -1,0 +1,23 @@
+<div class="detail">
+    <h6 class="p-15">Informations Générales</h6>
+    <div class="filter__group p-15">
+      <ul class="filter__options-list">
+        <li class="filter__options-item">Nom: {{ object.last_name }}</li>
+        <li class="filter__options-item">Prénom: {{ object.first_name }}</li>
+        <li class="filter__options-item">Age: {{ 'object.' }}</li>
+        <li class="filter__options-item">Grade: {{ object.grade }}</li>
+        <li class="filter__options-item">Ministère: {{ object.ministry }}</li>
+        <li class="filter__options-item">Part à la retraite à: {{ object.grade.retired_to }} ans</li>
+      </ul>
+    </div>
+    <br />
+    <h6 class="p-15">Informations Financières</h6>
+    <div class="filter__group p-15">
+      <ul class="filter__options-list">
+        <li class="filter__options-item">Montant plafond: 5 000 000 Francs CFA</li>
+        <li class="filter__options-item">Salaire NET: {{ 'object.salary' }}</li>
+        <li class="filter__options-item">Prêts anterieurs: {{ 'object.past_loans_amount' }}</li>
+        <li class="filter__options-item">Disponibilité: {{ 'object.available_loans' }}</li>
+      </ul>
+    </div>
+  </div>

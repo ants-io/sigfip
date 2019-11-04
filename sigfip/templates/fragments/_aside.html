@@ -1,0 +1,31 @@
+<div class="aside">
+  <h6 class="p-15">Administration</h6>
+  <ul class="aside__list">
+    <li class="aside__item">
+      <a href="{% url 'app:corps:list' %}" class="aside__link">Corps</a>
+    </li>
+    <li class="aside__item">
+      <a href="{% url 'app:grades:list' %}" class="aside__link">Grades</a>
+    </li>
+    <li class="aside__item">
+      <a href="{% url 'app:ministers:list' %}" class="aside__link"
+        >Ministères</a
+      >
+    </li>
+    <li class="aside__item">
+      <a href="{% url 'app:paying_orgs:list' %}" class="aside__link"
+        >Organismes payeur</a
+      >
+    </li>
+    <li class="aside__item">
+      <a href="{% url 'app:request_categories:list' %}" class="aside__link"
+        >Catégories de demande</a
+      >
+    </li>
+    <li class="aside__item">
+      <a href="{% url 'app:document_categories:list' %}" class="aside__link"
+        >Catégories de document</a
+      >
+    </li>
+  </ul>
+</div>
