@@ -68,8 +68,9 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "rest_framework",
     "django_celery_beat",
+    "django_filters",
+    "rest_framework",
 ]
 
 LOCAL_APPS = [
@@ -287,5 +288,13 @@ SOCIALACCOUNT_ADAPTER = "sigfip.users.adapters.SocialAccountAdapter"
 # https://django-compressor.readthedocs.io/en/latest/quickstart/#installation
 INSTALLED_APPS += ["compressor"]
 STATICFILES_FINDERS += ["compressor.finders.CompressorFinder"]
+
+# Django rest framework
+# ------------------------------------------------------------------------------
+# https://www.django-rest-framework.org/
+# REST_FRAMEWORK = {
+#     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+# }
+
 # Your stuff...
 # ------------------------------------------------------------------------------

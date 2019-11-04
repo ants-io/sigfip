@@ -137,12 +137,49 @@ class RequestCategoryModelForm(mixins.NameFormFields):
 
     class Meta(mixins.NameFormFields.Meta):
 
+        fields = '__all__'
         model = models.RequestCategory
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'filter__group__field'
             }),
-            'description': forms.Textarea(attrs={
+            'documents': forms.SelectMultiple(attrs={
                 'class': 'filter__group__textarea'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'filter__group__textarea',
+                'rows': '3'
             })
         }
+
+
+class LoanForm(ModelForm):
+
+    class Meta:
+
+        fields = [
+            'amount_requested',
+            'category',
+            'observations'
+        ]
+        model = models.Request
+        widgets = {
+            'amount_requested': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'category': forms.Select(attrs={
+                'class': 'filter__group__field'
+            }),
+            'observations': forms.Textarea(attrs={
+                'class': 'filter__group__textarea',
+                'rows': 2
+            })
+        }
+
+
+class DocumentForm(ModelForm):
+
+    class Meta:
+
+        fields = '__all__'
+        model = models.Document

@@ -13,6 +13,8 @@ from .views import paying_orgs as paying_orgs_views
 from .views import request_category as request_category_views
 from .views import document_category as document_category_views
 
+from .views.api.urls import urlpatterns
+
 app_name = "app"
 users_urlpatterns = [
     path("~redirect/", view=user_redirect_view, name="redirect"),
@@ -66,6 +68,7 @@ urlpatterns = [
     path(r'users/', include((users_urlpatterns, app_name), namespace='users')),
     path(r'corps/', include((corps_urlpatterns, app_name), namespace='corps')),
     path(r'grades/', include((grades_urlpatterns, app_name), namespace='grades')),
+    path(r'api/v1/', include((urlpatterns, app_name), namespace='api')),
     path(r'ministers/', include((ministers_urlpatterns, app_name), namespace='ministers')),
     path(r'paying-orgs/', include((paying_orgs_urlpatterns, app_name), namespace='paying_orgs')),
     path(r'request-categories/', include((request_categories_urlpatterns, app_name), namespace='request_categories')),
