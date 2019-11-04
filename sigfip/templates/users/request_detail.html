@@ -1,0 +1,144 @@
+{% extends "base.html" %} 
+
+{% load static %} 
+
+{% block title %}Loan: {{ object }}{% endblock %}
+
+{% block content %}
+
+<div class="wrapper">
+  <div class="banner">
+    <h3 class="p-15">
+      {{ user.first_name }} {{ user.last_name }}
+      <small class="fs-11">(<a href="{% url 'app:users:update' %}">Matricule: {{ user.matricule }})</a></small>
+    </h3>
+    <div class="tabs">
+      <ul class="tabs__list">
+        <li class="tabs__item tabs__item--active">
+          <a href="#loan_tab" class="tabs__link">Demandes</a>
+        </li>
+      </ul>
+      <div class="tabs__content">
+        <div id="loan_tab">
+          <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+              <div class="filter__group reset-padding">
+                <select class="filter__group__field">
+                  <option></option>
+                  <option value="frozen">Geler le dossier</option>
+                  <option value="accepted">Accepter la demande de prêt</option>
+                  <option value="rejected">Rejeter la demande de prêt</option>
+                  <option value="cancel">Annuler la demande</option>
+                  <option value="archived">Archiver</option>
+               </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <a class="btn btn-sm btn--primary">Consulter les limites d'âge</a>
+              <button type="submit" class="btn btn-sm btn--success">Entregistrer</button>
+            </div>
+            <div class="col-sm-12">
+              <div class="filter__group">
+                <label class="filter__group__label">Observations sur le dossier</label>
+                <textarea class="filter__group__textarea" placeholder="" rows="4"></textarea>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <table class="table_n m-t-15" id="loan_table_id">
+                <thead>
+                  <tr>
+                    <th>Type de pièce</th>
+                    <th>Nombre exigé</th>
+                    <th>Nombre fournie</th>
+                    <th>Référence</th>
+                    <th>Date pièce</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <br/>
+            <hr/>
+            <br/>
+            <div class="col-sm-12 m-t-15">
+              <div class="row">
+                <div class="col-sm-6 border-right">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="filter__group">
+                        <label class="filter__group__label">Montant prêt accordé</label>
+                        <input class="filter__group__field" placeholder="" name="amount_awarded"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="filter__group">
+                        <label class="filter__group__label">Montant à rembourser</label>
+                        <input class="filter__group__field" placeholder="" />
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="filter__group">
+                        <label class="filter__group__label">Salaire NET</label>
+                        <input class="filter__group__field" placeholder="" />
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="filter__group">
+                        <label class="filter__group__label">Montant demande</label>
+                        <input class="filter__group__field" placeholder="" />
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="filter__group">
+                        <label class="filter__group__label">Nombre de mensualité</label>
+                        <input class="filter__group__field" placeholder="" />
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="filter__group">
+                        <label class="filter__group__label">Quotité</label>
+                        <input class="filter__group__field" placeholder="" />
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="filter__group">
+                        <label class="filter__group__label">Précompte</label>
+                        <input class="filter__group__field" placeholder="" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="filter__group">
+                        <label class="filter__group__label">Date de traitement</label>
+                        <input class="filter__group__field" placeholder="" name="amount_awarded"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="filter__group">
+                        <label class="filter__group__label">Agent de traitement</label>
+                        <input class="filter__group__field" placeholder="" />
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="filter__group">
+                        <label class="filter__group__label">Date dépôt</label>
+                        <input class="filter__group__field" placeholder="" />
+                      </div>
+                    </div>
+                  </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'fragments/users/_user_infos.html' %}
+</div>
+{% endblock %}

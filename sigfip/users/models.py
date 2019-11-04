@@ -137,7 +137,7 @@ class Request(TimeStampedField):
     """
     Application for user to have a loan.
     """
-    STATUS_CHOICES = Choices('pending', 'accepted', 'archived', 'frozen', 'rejected')
+    STATUS_CHOICES = Choices('pending', 'accepted', 'archived', 'cancel', 'frozen', 'rejected')
 
     amount_requested = FloatField(_("Montant demandé"))
     amount_awarded = FloatField(_("Montant accordé"), blank=True, null=True)

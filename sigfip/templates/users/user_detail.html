@@ -1,6 +1,9 @@
 {% extends "base.html" %} 
+
 {% load static %} 
+
 {% block title %}User: {{ object.username }}{% endblock %}
+
 {% block content %}
 <div class="wrapper">
   <div class="banner">
@@ -15,7 +18,6 @@
         </li>
       </ul>
       <div class="tabs__content">
-        <div id="infos"></div>
         <div id="requests tabs__content-active">
           <a href="#" class="btn btn--success float-right btn-sm"
             >Ajouter une demande</a
@@ -46,7 +48,7 @@
                 <td>{{ loan.date }}</td>
                 <td>{{ loan.status }}</td>
                 <td>
-                  <a href="#" class="btn btn-sm btn--success">Voir</a>
+                  <a href="{% url 'app:loans:detail' pk=loan.pk %}" class="btn btn-sm btn--success">Voir</a>
                 </td>
               </tr>
               {% endfor %}
