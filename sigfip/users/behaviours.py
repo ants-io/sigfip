@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 from django.db.models import (CharField, DateTimeField, TextField, )
 from django.utils.translation import ugettext_lazy as _
@@ -32,3 +34,10 @@ class TimeStampedField(models.Model):
     class Meta:
         abstract = True
         ordering = ['created_at']
+
+
+def calculate_age(born):
+    if not born:
+        return None
+    today = date.today()
+    return today.year - born.year - ((today.month, today.day) < (born.month, born.day))

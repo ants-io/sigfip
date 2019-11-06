@@ -1,13 +1,25 @@
+{% if page.title == 'Loan' %}
 <div class="detail">
+    <h6 class="p-15">Status du dossier</h6>
+    <div class="filter__group p-15">
+      <ul class="filter__options-list">
+        <li class="filter__options-item">
+          STATUS: 
+          <span class="badge badge-{% if object.status == 'accepted' %}success{% elif object.status == 'archived' %}primary{% elif object.status == 'rejected' %}danger{% else %}warning{% endif %} float-right">{{ object.status }}</span>
+        </li>
+        <li class="filter__options-item">ETAT DU DOSSIER: <span class="badge badge-{% if object.loan_file %}success{% else%}danger{% endif %} float-right">{% if object.loan_file %}DOSSIER COMPLET{% else %}DOSSIER INCOMPLET{% endif %}</span></li>
+      </ul>
+    </div>
+    <br>
     <h6 class="p-15">Informations Générales</h6>
     <div class="filter__group p-15">
       <ul class="filter__options-list">
-        <li class="filter__options-item">Nom: {{ user.last_name }}</li>
-        <li class="filter__options-item">Prénom: {{ user.first_name }}</li>
-        <li class="filter__options-item">Age: {{ 'user.' }}</li>
-        <li class="filter__options-item">Grade: {{ user.grade }}</li>
-        <li class="filter__options-item">Ministère: {{ user.ministry }}</li>
-        <li class="filter__options-item">Part à la retraite à: {{ user.grade.retired_to }} ans</li>
+        <li class="filter__options-item">Nom: {{ object.user.last_name }}</li>
+        <li class="filter__options-item">Prénom: {{ object.user.first_name }}</li>
+        <li class="filter__options-item">Age: {{ object.user.age }}</li>
+        <li class="filter__options-item">Grade: {{ object.user.grade }}</li>
+        <li class="filter__options-item">Ministère: {{ object.user.ministry }}</li>
+        <li class="filter__options-item">Part à la retraite à: {{ object.user.grade.retired_to }} ans</li>
       </ul>
     </div>
     <br />
@@ -15,9 +27,34 @@
     <div class="filter__group p-15">
       <ul class="filter__options-list">
         <li class="filter__options-item">Montant plafond: 5 000 000 Francs CFA</li>
-        <li class="filter__options-item">Salaire NET: {{ 'user.salary' }}</li>
-        <li class="filter__options-item">Prêts anterieurs: {{ 'user.past_loans_amount' }}</li>
-        <li class="filter__options-item">Disponibilité: {{ 'user.available_loans' }}</li>
+        <li class="filter__options-item">Salaire NET: {{ object.user.salary }} Francs CFA</li>
+        <li class="filter__options-item">Prêts anterieurs: {{ object.user.past_loans_amount }} Francs</li>
+        <li class="filter__options-item">Disponibilité: {{ object.user.available_loans }}</li>
       </ul>
     </div>
   </div>
+{% else %}
+<div class="detail">
+    <h6 class="p-15">Informations Générales</h6>
+    <div class="filter__group p-15">
+      <ul class="filter__options-list">
+        <li class="filter__options-item">Nom: {{ object.last_name }}</li>
+        <li class="filter__options-item">Prénom: {{ object.first_name }}</li>
+        <li class="filter__options-item">Age: {{ object.age }}</li>
+        <li class="filter__options-item">Grade: {{ object.grade }}</li>
+        <li class="filter__options-item">Ministère: {{ object.ministry }}</li>
+        <li class="filter__options-item">Part à la retraite à: {{ object.grade.retired_to }} ans</li>
+      </ul>
+    </div>
+    <br />
+    <h6 class="p-15">Informations Financières</h6>
+    <div class="filter__group p-15">
+      <ul class="filter__options-list">
+        <li class="filter__options-item">Montant plafond: 5 000 000 Francs CFA</li>
+        <li class="filter__options-item">Salaire NET: {{ object.salary }} Francs CFA</li>
+        <li class="filter__options-item">Prêts anterieurs: {{ object.past_loans_amount }} Francs CFA</li>
+        <li class="filter__options-item">Disponibilité: {{ object.available_loans }}</li>
+      </ul>
+    </div>
+  </div>
+{% endif %}

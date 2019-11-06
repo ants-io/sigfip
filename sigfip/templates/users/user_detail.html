@@ -19,7 +19,7 @@
       </ul>
       <div class="tabs__content">
         <div id="requests tabs__content-active">
-          <a href="#" class="btn btn--success float-right btn-sm"
+          <a href="#cs_modal" id class="btn-modal-actions btn btn--success float-right btn-sm"
             >Ajouter une demande</a
           >
           <br class="clearfix" />
@@ -83,6 +83,7 @@
         <div class="filter__group">
           <label class="filter__group__label">{{ view.forms.loan_form.amount_requested.label }}</label>
           {{ view.forms.loan_form.amount_requested}}
+          <input type="hidden" value="{{ object.id }}" name="user"/>
         </div>
       </div>
       <div class="col-sm-6">

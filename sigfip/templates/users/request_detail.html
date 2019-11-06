@@ -20,120 +20,112 @@
       </ul>
       <div class="tabs__content">
         <div id="loan_tab">
-          <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-              <div class="filter__group reset-padding">
-                <select class="filter__group__field">
-                  <option></option>
-                  <option value="frozen">Geler le dossier</option>
-                  <option value="accepted">Accepter la demande de prêt</option>
-                  <option value="rejected">Rejeter la demande de prêt</option>
-                  <option value="cancel">Annuler la demande</option>
-                  <option value="archived">Archiver</option>
-               </select>
+          <form action="" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="category" value="{{ object.category.id }}"/>
+            <input type="hidden" name="user" value="{{ object.user.id }}"/>
+            {% comment %} <input type="hidden" name="status" value="{{ object.status }}"/> {% endcomment %}
+            <div class="row">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4">
+                <div class="filter__group reset-padding">
+                  {{ view.forms.form.status }}
+                </div>
               </div>
-            </div>
-            <div class="col-sm-4">
-              <a class="btn btn-sm btn--primary">Consulter les limites d'âge</a>
-              <button type="submit" class="btn btn-sm btn--success">Entregistrer</button>
-            </div>
-            <div class="col-sm-12">
-              <div class="filter__group">
-                <label class="filter__group__label">Observations sur le dossier</label>
-                <textarea class="filter__group__textarea" placeholder="" rows="4"></textarea>
+              <div class="col-sm-4">
+                <a class="btn btn-sm btn--primary">Consulter les limites d'âge</a>
+                <button type="submit" name="update_loan" class="btn btn-sm btn--success">Entregistrer</button>
               </div>
-            </div>
-            <div class="col-sm-12">
-              <table class="table_n m-t-15" id="loan_table_id">
-                <thead>
-                  <tr>
-                    <th>Type de pièce</th>
-                    <th>Nombre exigé</th>
-                    <th>Nombre fournie</th>
-                    <th>Référence</th>
-                    <th>Date pièce</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-            <br/>
-            <hr/>
-            <br/>
-            <div class="col-sm-12 m-t-15">
-              <div class="row">
-                <div class="col-sm-6 border-right">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <div class="filter__group">
-                        <label class="filter__group__label">Montant prêt accordé</label>
-                        <input class="filter__group__field" placeholder="" name="amount_awarded"/>
+              <div class="col-sm-12">
+                <div class="filter__group">
+                  <label class="filter__group__label">Observations sur le dossier</label>
+                  {{ view.forms.form.observations }}
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <table class="table_n m-t-15" id="loan_table_id">
+                  <thead>
+                    <tr>
+                      <th>Type de pièce</th>
+                      <th>Nombre exigé</th>
+                      <th>Nombre fournie</th>
+                      <th>Référence</th>
+                      <th>Date pièce</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for document in object.document_set.all %}
+                    <tr>
+                      <td>
+                        {{ document.document_category.name }}
+                        <input type="hidden" name="document_id" value="{{ document.id }}"/>
+                      </td>
+                      <td>{{ document.document_category.required_number }}</td>
+                      <td><input type="text" name="provided_number" value="{{ document.provided_number }}" class="filter__group__textarea"/></td>
+                      <td><input type="text" name="reference" value="{{ document.reference }}" class="filter__group__textarea"/></td>
+                      <td><input type="text" name="document_date" value="{{ document.document_date.year }}-{{document.document_date.month}}-{{document.document_date.day}}" class="filter__group__textarea"/></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <br/>
+              <hr/>
+              <br/>
+              <div class="col-sm-12 m-t-15">
+                <div class="row">
+                  <div class="col-sm-4 border-right">
+                    <div class="row">
+                      {% for field in view.forms.form %}
+                      {% if field.name in 'amount_awarded, amount_to_repay' %}
+                      <div class="col-sm-12">
+                        <div class="filter__group">
+                          <label class="filter__group__label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                          {{ field }}
+                        </div>
                       </div>
+                      {% endif %}
+                      {% endfor %}
                     </div>
-                    <div class="col-sm-12">
-                      <div class="filter__group">
-                        <label class="filter__group__label">Montant à rembourser</label>
-                        <input class="filter__group__field" placeholder="" />
+                  </div>
+                  <div class="col-sm-4 border-right">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="filter__group">
+                          <label class="filter__group__label" for="id_salary">A. Salaire NET</label>
+                          <input type="text" name="salary" class="filter__group__field" value={{ object.user.salary }} />
+                        </div>
                       </div>
+                      {% for field in view.forms.form %}
+                      {% if field.name in 'amount_requested, monthly_payment_number, quota, withholding' %}
+                      <div class="col-sm-12">
+                        <div class="filter__group">
+                          <label class="filter__group__label" for="{{ field.id_for_label }}">{{ field.label|safe }}</label>
+                          {{ field }}
+                        </div>
+                      </div>
+                      {% endif %}
+                      {% endfor %}
                     </div>
-                    <div class="col-sm-12">
-                      <div class="filter__group">
-                        <label class="filter__group__label">Salaire NET</label>
-                        <input class="filter__group__field" placeholder="" />
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="row">
+                      {% for field in view.forms.form %}
+                      {% if field.name in 'date, treatment_date, treatment_agent' %}
+                      <div class="col-sm-12">
+                        <div class="filter__group">
+                          <label class="filter__group__label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                          {{ field }}
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <div class="filter__group">
-                        <label class="filter__group__label">Montant demande</label>
-                        <input class="filter__group__field" placeholder="" />
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <div class="filter__group">
-                        <label class="filter__group__label">Nombre de mensualité</label>
-                        <input class="filter__group__field" placeholder="" />
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <div class="filter__group">
-                        <label class="filter__group__label">Quotité</label>
-                        <input class="filter__group__field" placeholder="" />
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <div class="filter__group">
-                        <label class="filter__group__label">Précompte</label>
-                        <input class="filter__group__field" placeholder="" />
-                      </div>
+                      {% endif %}
+                      {% endfor %}
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <div class="filter__group">
-                        <label class="filter__group__label">Date de traitement</label>
-                        <input class="filter__group__field" placeholder="" name="amount_awarded"/>
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <div class="filter__group">
-                        <label class="filter__group__label">Agent de traitement</label>
-                        <input class="filter__group__field" placeholder="" />
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <div class="filter__group">
-                        <label class="filter__group__label">Date dépôt</label>
-                        <input class="filter__group__field" placeholder="" />
-                      </div>
-                    </div>
-                  </div>
-                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

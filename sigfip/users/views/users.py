@@ -44,7 +44,8 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
         'phone',
         'grade',
         'ministry',
-        'paying_org'
+        'paying_org',
+        'salary',
     ]
 
     def get_success_url(self):

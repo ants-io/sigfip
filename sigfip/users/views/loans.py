@@ -8,10 +8,21 @@ from .. import forms, models
 from . import mixins
 
 
+class MinistryMixin(mixins.PageMixin):
+    page = {
+        'title': 'Loan',
+        'namespaces': {},
+        'field_list': []
+    }
+
+
 class LoanDetailView(
     LoginRequiredMixin,
-    # mixins.LoanDetailMixin,
-        DetailView):
+    mixins.LoanDetailMixin,
+    mixins.UserDetailMixin,
+    MinistryMixin,
+    DetailView
+):
 
     model = models.Request
 

@@ -15,6 +15,7 @@ jQuery(function($) {
     bindEvents: function() {
       $('#id_category').on('change', this.updateTitle.bind(this));
       $('#id_category').on('change', this.fetchDocuments.bind(this));
+      $('.btn-modal-actions').on('click', this.modalShow.bind(this));
     },
 
     updateTitle: event => {
@@ -47,6 +48,13 @@ jQuery(function($) {
             $('#loan_table_id tr:last').after(row);
           });
         });
+    },
+
+    modalShow(event) {
+      event.preventDefault();
+
+      const modalId = event.currentTarget.getAttribute('href');
+      $(modalId).show();
     }
   };
 
