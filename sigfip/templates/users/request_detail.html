@@ -10,7 +10,7 @@
   <div class="banner">
     <h3 class="p-15">
       {{ user.first_name }} {{ user.last_name }}
-      <small class="fs-11">(<a href="{% url 'app:users:update' %}">Matricule: {{ user.matricule }})</a></small>
+      <small class="fs-11">(<a href="{% url 'app:users:profile' %}">Matricule: {{ user.matricule }})</a></small>
     </h3>
     <div class="tabs">
       <ul class="tabs__list">

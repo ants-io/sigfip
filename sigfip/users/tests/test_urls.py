@@ -14,8 +14,8 @@ def test_detail(user: settings.AUTH_USER_MODEL):
 
 
 def test_update():
-    assert reverse("app:users:update") == "/users/~update/"
-    assert resolve("/users/~update/").view_name == "app:users:update"
+    assert reverse("app:users:profile") == "/users/~update/"
+    assert resolve("/users/~update/").view_name == "app:users:profile"
 
 
 def test_redirect():

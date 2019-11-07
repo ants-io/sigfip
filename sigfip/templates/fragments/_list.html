@@ -27,8 +27,13 @@
           <a
             href="{% url page.namespaces.delete pk=object.pk %}"
             class="text-danger fs-11"
-            ><i class="fas fa-trash-alt"></i> Supprimer</a
-          >
+            ><i class="fas fa-trash-alt"></i> Supprimer</a>
+          {% if page.title == 'User' %}
+          <a
+            href="{% url page.namespaces.detail object.username %}"
+            class="text-primary fs-11"
+            ><i class="fas fa-eye"></i> Détail</a>
+          {% endif %}
         </div>
         <div class="clearfix"></div>
       </td>

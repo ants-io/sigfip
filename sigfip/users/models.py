@@ -35,7 +35,7 @@ class User(AbstractUser):
     registration_date = DateField(_("Date d'entrée"), blank=True, null=True)
     cni = CharField(_("Numéro Carte d'identité"), blank=True, null=True, max_length=100)
     retirement_age = IntegerField(_("Age de la retraite"), default=60)
-    salary = FloatField(_("Age de la retraite"), default=0)
+    salary = FloatField(_("Salaire"), default=0)
     address = TextField(_("Adresse"))
     postal_box = CharField(_("Boite postale"), max_length=20)
     phone = CharField(_("Mobile / Téléphone"), max_length=20)

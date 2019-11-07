@@ -4,6 +4,10 @@ from sigfip.users.views.users import (
     user_redirect_view,
     user_update_view,
     user_detail_view,
+    user_list_view,
+    user_create_view,
+    user_profile_view,
+    users_delete_view,
 )
 
 from .views import corps as corps_views
@@ -19,8 +23,12 @@ from .views.api.urls import urlpatterns
 
 app_name = "app"
 users_urlpatterns = [
+    path("list/", view=user_list_view, name="list"),
+    path("create/", view=user_create_view, name="create"),
     path("~redirect/", view=user_redirect_view, name="redirect"),
-    path("~update/", view=user_update_view, name="update"),
+    path("~profile/", view=user_profile_view, name="profile"),
+    path("<int:pk>/delete/", view=users_delete_view, name="delete"),
+    path("<int:pk>/update/", view=user_update_view, name="update"),
     path("<str:username>/", view=user_detail_view, name="detail"),
 ]
 

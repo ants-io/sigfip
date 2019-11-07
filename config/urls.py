@@ -1,21 +1,25 @@
 from django.conf import settings
-from django.urls import include, path
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
+from django.urls import include, path
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
+from django_filters.views import FilterView
+
+from sigfip.users.filters import UserFilter
+
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path(
-        "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
-    ),
-    # Django Admin, use {% url 'admin:index' %}
+    path("", login_required(TemplateView.as_view(template_name="pages/home.html")), name="home"),
+    path("search/", login_required(FilterView.as_view(
+        filterset_class=UserFilter,
+        template_name="pages/home.html"
+    )), name="search"),
     path(settings.ADMIN_URL, admin.site.urls),
-    # User management
+    # User ~> App management
     path("", include("sigfip.users.urls", namespace="app")),
     path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

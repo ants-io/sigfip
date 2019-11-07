@@ -34,6 +34,77 @@ class UserCreationForm(from_auth_forms.UserCreationForm):
         raise ValidationError(self.error_messages["duplicate_username"])
 
 
+class UserForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name',
+            'birth_date',
+            'birth_place',
+            'sex',
+            'registration_number',
+            'registration_date',
+            'cni',
+            'address',
+            'postal_box',
+            'phone',
+            'grade',
+            'ministry',
+            'paying_org',
+            'salary',
+        ]
+        widgets = {
+            'first_name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'last_name': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'birth_date': forms.TextInput(attrs={
+                'class': 'filter__group__field date'
+            }),
+            'birth_place': forms.TextInput(attrs={
+                'class': 'filter__group__field date'
+            }),
+            'sex': forms.Select(attrs={
+                'class': 'filter__group__field'
+            }),
+            'registration_number': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'registration_date': forms.TextInput(attrs={
+                'class': 'filter__group__field date'
+            }),
+            'cni': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'address': forms.Textarea(attrs={
+                'class': 'filter__group__textarea',
+                'rows': 3
+            }),
+            'postal_box': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'phone': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'grade': forms.Select(attrs={
+                'class': 'filter__group__field'
+            }),
+            'ministry': forms.Select(attrs={
+                'class': 'filter__group__field'
+            }),
+            'paying_org': forms.Select(attrs={
+                'class': 'filter__group__field'
+            }),
+            'salary': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+        }
+
+
 class SalaryModelForm(forms.ModelForm):
 
     class Meta:

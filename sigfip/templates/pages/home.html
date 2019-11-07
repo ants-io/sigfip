@@ -37,37 +37,68 @@
       </button>
     </div>
 
-    <div class="result">
+    <div class="result" id="age-limit-search-block">
       <table class="result__table">
         <thead>
           <tr>
             <th>#</th>
-            <th>f1</th>
-            <th>f2</th>
-            <th>...</th>
-            <th>f3</th>
+            <th>Matricule</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Montant</th>
+            <th>Date Dépot</th>
+            <th>Age</th>
+            <th>Retraite</th>
+            <th>Restant</th>
+            <th>Requis</th>
+            <th>Différence</th>
           </tr>
         </thead>
         <tbody>
           <tr>
+            <td>
+              <input type="checkbox" />
+            </td>
             <td>_</td>
             <td>_</td>
             <td>_</td>
-            <td>...</td>
+            <td>_</td>
+            <td>_</td>
+            <td>_</td>
+            <td>_</td>
+            <td>_</td>
+            <td>_</td>
             <td>_</td>
           </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="result" id="agents-search-block">
+      <table class="result__table">
+        <thead>
           <tr>
-            <td>_</td>
-            <td>_</td>
-            <td>_</td>
-            <td>...</td>
-            <td>_</td>
+            <th>#</th>
+            <th>Date de dépôt</th>
+            <th>Numéro</th>
+            <th>Matricule</th>
+            <th>Nom</th>
+            <th>Corps</th>
+            <th>Etat</th>
+            <th>Montant</th>
           </tr>
+        </thead>
+        <tbody>
           <tr>
+            <td>
+              <input type="checkbox" />
+            </td>
             <td>_</td>
             <td>_</td>
             <td>_</td>
-            <td>...</td>
+            <td>_</td>
+            <td>_</td>
+            <td>_</td>
             <td>_</td>
           </tr>
         </tbody>
@@ -109,10 +140,10 @@
           <i class="fas fa-chevron-down float-right"></i>
           <ul class="filter__options-list">
             <li class="filter__options-item">
-              <input type="checkbox" name="metier" /> P 1
+              <input type="checkbox" name="metier" /> Informaticien
             </li>
             <li class="filter__options-item">
-              <input type="checkbox" name="metier" /> P 2
+              <input type="checkbox" name="metier" /> Administrateur civil
             </li>
           </ul>
         </div>
@@ -120,10 +151,10 @@
           <label class="filter__group__label">Par Corps</label>
           <ul class="filter__options-list">
             <li class="filter__options-item">
-              <input type="checkbox" name="metier" /> P 1
+              <input type="checkbox" name="metier" /> ADMINISTRATION PENITENTIAIRE
             </li>
             <li class="filter__options-item">
-              <input type="checkbox" name="metier" /> P 2
+              <input type="checkbox" name="metier" /> EAUX ET FORETS
             </li>
           </ul>
         </div>
@@ -131,10 +162,10 @@
           <label class="filter__group__label">Par Grade</label>
           <ul class="filter__options-list">
             <li class="filter__options-item">
-              <input type="checkbox" name="metier" /> P 1
+              <input type="checkbox" name="metier" /> Surveillant de Prison
             </li>
             <li class="filter__options-item">
-              <input type="checkbox" name="metier" /> P 2
+              <input type="checkbox" name="metier" /> Brigadier de Prison
             </li>
           </ul>
         </div>
@@ -142,10 +173,10 @@
           <label class="filter__group__label">Par Ministère</label>
           <ul class="filter__options-list">
             <li class="filter__options-item">
-              <input type="checkbox" name="metier" /> P 1
+              <input type="checkbox" name="metier" /> Présidence de la République
             </li>
             <li class="filter__options-item">
-              <input type="checkbox" name="metier" /> P 2
+              <input type="checkbox" name="metier" /> Primature
             </li>
           </ul>
         </div>
@@ -153,10 +184,10 @@
           <label class="filter__group__label">Par Organisme payeur</label>
           <ul class="filter__options-list">
             <li class="filter__options-item">
-              <input type="checkbox" name="metier" /> P 1
+              <input type="checkbox" name="metier" /> Mairie de Dakar
             </li>
             <li class="filter__options-item">
-              <input type="checkbox" name="metier" /> P 2
+              <input type="checkbox" name="metier" /> Mairie de Koumpentoum
             </li>
           </ul>
         </div>
