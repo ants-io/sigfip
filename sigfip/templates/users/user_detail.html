@@ -1,6 +1,9 @@
 {% extends "base.html" %} 
+
 {% load static %} 
+
 {% block title %}User: {{ object.username }}{% endblock %}
+
 {% block content %}
 <div class="wrapper">
   <div class="banner">
@@ -15,9 +18,8 @@
         </li>
       </ul>
       <div class="tabs__content">
-        <div id="infos"></div>
         <div id="requests tabs__content-active">
-          <a href="#" class="btn btn--success float-right btn-sm"
+          <a href="#cs_modal" id class="btn-modal-actions btn btn--success float-right btn-sm"
             >Ajouter une demande</a
           >
           <br class="clearfix" />
@@ -46,7 +48,7 @@
                 <td>{{ loan.date }}</td>
                 <td>{{ loan.status }}</td>
                 <td>
-                  <a href="#" class="btn btn-sm btn--success">Voir</a>
+                  <a href="{% url 'app:loans:detail' pk=loan.pk %}" class="btn btn-sm btn--success">Voir</a>
                 </td>
               </tr>
               {% endfor %}
@@ -81,6 +83,7 @@
         <div class="filter__group">
           <label class="filter__group__label">{{ view.forms.loan_form.amount_requested.label }}</label>
           {{ view.forms.loan_form.amount_requested}}
+          <input type="hidden" value="{{ object.id }}" name="user"/>
         </div>
       </div>
       <div class="col-sm-6">

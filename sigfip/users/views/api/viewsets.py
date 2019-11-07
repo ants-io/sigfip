@@ -29,3 +29,13 @@ class LoanRequestDocumentViewSet(viewsets.ModelViewSet):
         serialized_documents = serializers.DocumentCategorySerializer(documents, many=True)
 
         return Response(serialized_documents.data)
+
+
+class PrepaymentTableViewSet(viewsets.ModelViewSet):
+
+    serializer_class = serializers.PrepaymentTableSerializer
+    queryset = models.PrepaymentTable.objects.all()
+
+    @action(detail=False)
+    def compute(self, request, *args, **kwargs):
+        return Response({})

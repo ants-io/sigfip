@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.contrib.auth.models import AbstractUser
 from django.db.models import (
     CharField,
@@ -18,7 +19,7 @@ from model_utils.models import StatusModel
 from model_utils.fields import StatusField
 from model_utils import Choices
 
-from .behaviours import (NameField, TimeStampedField)
+from .behaviours import (NameField, TimeStampedField, calculate_age)
 
 
 class User(AbstractUser):
@@ -34,6 +35,7 @@ class User(AbstractUser):
     registration_date = DateField(_("Date d'entrée"), blank=True, null=True)
     cni = CharField(_("Numéro Carte d'identité"), blank=True, null=True, max_length=100)
     retirement_age = IntegerField(_("Age de la retraite"), default=60)
+    salary = FloatField(_("Age de la retraite"), default=0)
     address = TextField(_("Adresse"))
     postal_box = CharField(_("Boite postale"), max_length=20)
     phone = CharField(_("Mobile / Téléphone"), max_length=20)
@@ -46,11 +48,28 @@ class User(AbstractUser):
         verbose_name=_("Organisme payeur"),
         on_delete=models.CASCADE)
 
+    def age(self):
+        age = calculate_age(self.birth_date)
+        return f'{age} ans' if age else '_'
+
     def full_name(self):
         return f'{self.name} {self.last_name}'
 
     def get_absolute_url(self):
         return reverse("app:users:detail", kwargs={"username": self.username})
+
+    @property
+    def past_loans_amount(self):
+        amount = self.request_set\
+            .filter(status='accepted')\
+            .aggregate(total=Sum('amount_awarded'))\
+            .get('total')
+
+        return amount if amount else 0
+
+    @property
+    def available_loans(self):
+        return 5000000 - self.past_loans_amount
 
 
 class Salary(TimeStampedField):
@@ -58,7 +77,7 @@ class Salary(TimeStampedField):
     Model that track all user's salary evolution.
     """
 
-    user = ForeignKey(User, on_delete=models.CASCADE)
+    # user = ForeignKey(User, on_delete=models.CASCADE)
     kind = IntegerField(_("Type"), choices=(
         (0, _("Brute")),
         (1, _("NET")),
@@ -137,11 +156,17 @@ class Request(TimeStampedField):
     """
     Application for user to have a loan.
     """
-    STATUS_CHOICES = Choices('pending', 'accepted', 'archived', 'frozen', 'rejected')
+    STATUS_CHOICES = Choices('pending', 'accepted', 'archived', 'cancel', 'frozen', 'rejected')
 
     amount_requested = FloatField(_("Montant demandé"))
-    amount_awarded = FloatField(_("Montant accordé"), blank=True, null=True)
+    amount_awarded = FloatField(_("Montant prêt accordé"), blank=True, null=True)
+    amount_to_repay = FloatField(_("Montant à rembourser"), blank=True, null=True)
+    monthly_payment_number = FloatField(_("C. Nombre de mensualité"), blank=True, null=True)
+    quota = FloatField(_("D. Quotité = A / 3"), blank=True, null=True)
+    withholding = FloatField(
+        _("E. Précompte = Montant prêt / <span id='id_n_months'>C</span>"), blank=True, null=True)
     date = DateField(_("Date de dépôt de la demande"), blank=True, null=True)
+    treatment_date = DateField(_("Date de traitement"), blank=True, null=True)
     post_reference = CharField(_("Référence courier"), max_length=20, blank=True, null=True)
     category = ForeignKey(
         RequestCategory,
@@ -150,9 +175,25 @@ class Request(TimeStampedField):
     observations = TextField(_("Observations"), blank=True)
     status = StatusField(choices_name='STATUS_CHOICES')
     user = ForeignKey(User, verbose_name=_("Agent"), on_delete=models.CASCADE)
+    treatment_agent = ForeignKey(
+        User,
+        verbose_name=_("Agent de traitement"),
+        related_name='treatment_agent',
+        on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['created_at']
+
+    @property
+    def loan_file(self):
+        documents = self.document_set.all()
+        for doc in documents:
+            if doc.provided_number < doc.document_category.required_number:
+                return False
+        return True
+
+    def get_absolute_url(self):
+        return reverse("app:loans:detail", kwargs={"pk": self.pk})
 
 
 class Document(TimeStampedField):
@@ -162,6 +203,7 @@ class Document(TimeStampedField):
     physical_document = FileField(_("Document"), blank=True, null=True)
     provided_number = IntegerField(_("Nombre fourni"), default=0)
     reference = CharField(_("Nombre exigé"), max_length=255, blank=True, null=True)
+    document_date = DateField(_("Date pièce"), blank=True, null=True)
     document_category = ForeignKey(
         DocumentCategory,
         verbose_name=_("Document de reference"),
@@ -170,3 +212,18 @@ class Document(TimeStampedField):
         Request,
         verbose_name=_("Demande correspondante"),
         on_delete=models.CASCADE)
+
+
+class PrepaymentTable(TimeStampedField):
+    loan_amount = FloatField(_("Montant du prêt"))
+    duration = FloatField(_("Durée en années"))
+    monthly_withdrawal = IntegerField(_("Prélévement mensuel"))
+    recoverable_third_party = FloatField(_("Tiers saisissable"))
+    minimal_salary = FloatField(_("Salaire minimum"))
+
+    class Meta:
+
+        verbose_name_plural = 'prepayment_table'
+
+    def __str__(self):
+        return f'Loan: {self.loan_amount}, duration: {self.duration}, minimal salary: {self.minimal_salary}'

@@ -17,3 +17,11 @@ class LoadRequestCategorySerializer(serializers.ModelSerializer):
 
         model = models.RequestCategory
         fields = ['id', 'name']
+
+
+class PrepaymentTableSerializer(serializers.ModelSerializer):
+
+    class Meta:
+
+        model = models.PrepaymentTable
+        fields = ['id', 'loan_amount', 'duration', 'monthly_withdrawal', 'recoverable_third_party', 'minimal_salary']

@@ -12,6 +12,8 @@ from .views import ministers as ministers_views
 from .views import paying_orgs as paying_orgs_views
 from .views import request_category as request_category_views
 from .views import document_category as document_category_views
+from .views import loans as loans_views
+from .views import prepayments_table as prepayments_table_views
 
 from .views.api.urls import urlpatterns
 
@@ -64,13 +66,30 @@ document_categories_urlpatterns = [
     path("<int:pk>/delete/", view=document_category_views.document_categories_delete_view, name="delete"),
 ]
 
+loans_urlpatterns = [
+    # path("list/", view=document_category_views.document_categories_list_view, name="list"),
+    # path("create/", view=document_category_views.document_categories_create_view, name="create"),
+    path("<int:pk>/detail/", view=loans_views.loan_detail_view, name="detail"),
+    # path("<int:pk>/update/", view=document_category_views.document_categories_update_view, name="update"),
+    # path("<int:pk>/delete/", view=document_category_views.document_categories_delete_view, name="delete"),
+]
+
+prepayments_table_urlpatterns = [
+    path("list/", view=prepayments_table_views.prepayments_table_list_view, name="list"),
+    path("create/", view=prepayments_table_views.prepayments_table_create_view, name="create"),
+    path("<int:pk>/update/", view=prepayments_table_views.prepayments_table_update_view, name="update"),
+    path("<int:pk>/delete/", view=prepayments_table_views.prepayments_table_delete_view, name="delete"),
+]
+
 urlpatterns = [
     path(r'users/', include((users_urlpatterns, app_name), namespace='users')),
+    path(r'loans/', include((loans_urlpatterns, app_name), namespace='loans')),
     path(r'corps/', include((corps_urlpatterns, app_name), namespace='corps')),
     path(r'grades/', include((grades_urlpatterns, app_name), namespace='grades')),
     path(r'api/v1/', include((urlpatterns, app_name), namespace='api')),
     path(r'ministers/', include((ministers_urlpatterns, app_name), namespace='ministers')),
     path(r'paying-orgs/', include((paying_orgs_urlpatterns, app_name), namespace='paying_orgs')),
+    path(r'prepayments-table/', include((prepayments_table_urlpatterns, app_name), namespace='prepayments_table')),
     path(r'request-categories/', include((request_categories_urlpatterns, app_name), namespace='request_categories')),
     path(r'document-categories/', include((document_categories_urlpatterns, app_name), namespace='document_categories')),
 ]

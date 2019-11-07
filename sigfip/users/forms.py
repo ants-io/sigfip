@@ -38,7 +38,7 @@ class SalaryModelForm(forms.ModelForm):
 
     class Meta:
         model = models.Salary
-        fields = ['user', 'kind', 'amount', 'change_at']
+        fields = ['kind', 'amount', 'change_at']
         widgets: {
             'kind': forms.TextInput(),
             'amount': forms.TextInput(),
@@ -153,11 +153,37 @@ class RequestCategoryModelForm(mixins.NameFormFields):
         }
 
 
+class PrepaymentTableForm(mixins.NameFormFields):
+
+    class Meta:
+
+        fields = '__all__'
+        model = models.PrepaymentTable
+        widgets = {
+            'loan_amount': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'duration': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'monthly_withdrawal': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'recoverable_third_party': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'minimal_salary': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+        }
+
+
 class LoanForm(ModelForm):
 
     class Meta:
 
         fields = [
+            'user',
             'amount_requested',
             'category',
             'observations'
@@ -172,8 +198,57 @@ class LoanForm(ModelForm):
             }),
             'observations': forms.Textarea(attrs={
                 'class': 'filter__group__textarea',
-                'rows': 2
+                'rows': 4
             })
+        }
+
+
+class LoanDetailForm(ModelForm):
+
+    class Meta:
+
+        fields = '__all__'
+        model = models.Request
+        widgets = {
+            'amount_requested': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'amount_awarded': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'amount_to_repay': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'monthly_payment_number': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'quota': forms.TextInput(attrs={
+                'class': 'filter__group__field',
+                'disabled': True
+            }),
+            'withholding': forms.TextInput(attrs={
+                'class': 'filter__group__field',
+                'disabled': True
+            }),
+            'status': forms.Select(attrs={
+                'class': 'filter__group__field'
+            }),
+            'category': forms.Select(attrs={
+                'class': 'filter__group__field'
+            }),
+            'observations': forms.Textarea(attrs={
+                'class': 'filter__group__textarea',
+                'rows': 4
+            }),
+            'date': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'treatment_date': forms.TextInput(attrs={
+                'class': 'filter__group__field'
+            }),
+            'treatment_agent': forms.Select(attrs={
+                'class': 'filter__group__field'
+            }),
         }
 
 

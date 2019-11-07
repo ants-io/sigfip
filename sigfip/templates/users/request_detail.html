@@ -1,0 +1,136 @@
+{% extends "base.html" %} 
+
+{% load static %} 
+
+{% block title %}Loan: {{ object }}{% endblock %}
+
+{% block content %}
+
+<div class="wrapper">
+  <div class="banner">
+    <h3 class="p-15">
+      {{ user.first_name }} {{ user.last_name }}
+      <small class="fs-11">(<a href="{% url 'app:users:update' %}">Matricule: {{ user.matricule }})</a></small>
+    </h3>
+    <div class="tabs">
+      <ul class="tabs__list">
+        <li class="tabs__item tabs__item--active">
+          <a href="#loan_tab" class="tabs__link">Demandes</a>
+        </li>
+      </ul>
+      <div class="tabs__content">
+        <div id="loan_tab">
+          <form action="" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="category" value="{{ object.category.id }}"/>
+            <input type="hidden" name="user" value="{{ object.user.id }}"/>
+            {% comment %} <input type="hidden" name="status" value="{{ object.status }}"/> {% endcomment %}
+            <div class="row">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4">
+                <div class="filter__group reset-padding">
+                  {{ view.forms.form.status }}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <a class="btn btn-sm btn--primary">Consulter les limites d'âge</a>
+                <button type="submit" name="update_loan" class="btn btn-sm btn--success">Entregistrer</button>
+              </div>
+              <div class="col-sm-12">
+                <div class="filter__group">
+                  <label class="filter__group__label">Observations sur le dossier</label>
+                  {{ view.forms.form.observations }}
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <table class="table_n m-t-15" id="loan_table_id">
+                  <thead>
+                    <tr>
+                      <th>Type de pièce</th>
+                      <th>Nombre exigé</th>
+                      <th>Nombre fournie</th>
+                      <th>Référence</th>
+                      <th>Date pièce</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for document in object.document_set.all %}
+                    <tr>
+                      <td>
+                        {{ document.document_category.name }}
+                        <input type="hidden" name="document_id" value="{{ document.id }}"/>
+                      </td>
+                      <td>{{ document.document_category.required_number }}</td>
+                      <td><input type="text" name="provided_number" value="{{ document.provided_number }}" class="filter__group__textarea"/></td>
+                      <td><input type="text" name="reference" value="{{ document.reference }}" class="filter__group__textarea"/></td>
+                      <td><input type="text" name="document_date" value="{{ document.document_date.year }}-{{document.document_date.month}}-{{document.document_date.day}}" class="filter__group__textarea"/></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <br/>
+              <hr/>
+              <br/>
+              <div class="col-sm-12 m-t-15">
+                <div class="row">
+                  <div class="col-sm-4 border-right">
+                    <div class="row">
+                      {% for field in view.forms.form %}
+                      {% if field.name in 'amount_awarded, amount_to_repay' %}
+                      <div class="col-sm-12">
+                        <div class="filter__group">
+                          <label class="filter__group__label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                          {{ field }}
+                        </div>
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="col-sm-4 border-right">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="filter__group">
+                          <label class="filter__group__label" for="id_salary">A. Salaire NET</label>
+                          <input type="text" name="salary" class="filter__group__field" value={{ object.user.salary }} />
+                        </div>
+                      </div>
+                      {% for field in view.forms.form %}
+                      {% if field.name in 'amount_requested, monthly_payment_number, quota, withholding' %}
+                      <div class="col-sm-12">
+                        <div class="filter__group">
+                          <label class="filter__group__label" for="{{ field.id_for_label }}">{{ field.label|safe }}</label>
+                          {{ field }}
+                        </div>
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="row">
+                      {% for field in view.forms.form %}
+                      {% if field.name in 'date, treatment_date, treatment_agent' %}
+                      <div class="col-sm-12">
+                        <div class="filter__group">
+                          <label class="filter__group__label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                          {{ field }}
+                        </div>
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'fragments/users/_user_infos.html' %}
+</div>
+{% endblock %}
