@@ -39,6 +39,8 @@ class User(AbstractUser):
     address = TextField(_("Adresse"))
     postal_box = CharField(_("Boite postale"), max_length=20)
     phone = CharField(_("Mobile / Téléphone"), max_length=20)
+    profession = ForeignKey(
+        'Profession', verbose_name=_("Ministère"), blank=True, null=True, on_delete=models.CASCADE)
     grade = ForeignKey(
         'Grade', verbose_name=_("Grade"), on_delete=models.CASCADE)
     ministry = ForeignKey(
@@ -51,6 +53,15 @@ class User(AbstractUser):
     def age(self):
         age = calculate_age(self.birth_date)
         return f'{age} ans' if age else '_'
+
+    def retirement_age(self):
+        return self.grade.retired_to
+
+    def last_loan_remaining_months(self):
+        return 0
+
+    def last_loan_required_months(self):
+        return 0
 
     def full_name(self):
         return f'{self.name} {self.last_name}'
@@ -113,6 +124,13 @@ class Grade(NameField):
         verbose_name_plural = 'grades'
 
 
+class Profession(NameField):
+    """
+    Model that store all existing Corps in System.
+    """
+    pass
+
+
 class Ministry(NameField):
     """
     Model that store all existing Corps in System.
@@ -168,6 +186,7 @@ class Request(TimeStampedField):
     date = DateField(_("Date de dépôt de la demande"), blank=True, null=True)
     treatment_date = DateField(_("Date de traitement"), blank=True, null=True)
     post_reference = CharField(_("Référence courier"), max_length=20, blank=True, null=True)
+    convention = CharField(_("Convention"), max_length=100, blank=True, null=True)
     category = ForeignKey(
         RequestCategory,
         verbose_name=_("Catégorie de la demande"),

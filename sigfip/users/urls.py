@@ -90,14 +90,14 @@ prepayments_table_urlpatterns = [
 ]
 
 urlpatterns = [
-    path(r'users/', include((users_urlpatterns, app_name), namespace='users')),
-    path(r'loans/', include((loans_urlpatterns, app_name), namespace='loans')),
-    path(r'corps/', include((corps_urlpatterns, app_name), namespace='corps')),
-    path(r'grades/', include((grades_urlpatterns, app_name), namespace='grades')),
-    path(r'api/v1/', include((urlpatterns, app_name), namespace='api')),
-    path(r'ministers/', include((ministers_urlpatterns, app_name), namespace='ministers')),
-    path(r'paying-orgs/', include((paying_orgs_urlpatterns, app_name), namespace='paying_orgs')),
-    path(r'prepayments-table/', include((prepayments_table_urlpatterns, app_name), namespace='prepayments_table')),
-    path(r'request-categories/', include((request_categories_urlpatterns, app_name), namespace='request_categories')),
-    path(r'document-categories/', include((document_categories_urlpatterns, app_name), namespace='document_categories')),
+    path('users/', include((users_urlpatterns, app_name), namespace='users')),
+    path('loans/', include((loans_urlpatterns, app_name), namespace='loans')),
+    path('corps/', include((corps_urlpatterns, app_name), namespace='corps')),
+    path('grades/', include((grades_urlpatterns, app_name), namespace='grades')),
+    path('api/v1/', include((urlpatterns, app_name), namespace='api')),
+    path('ministers/', include((ministers_urlpatterns, app_name), namespace='ministers')),
+    path('paying-orgs/', include((paying_orgs_urlpatterns, app_name), namespace='paying_orgs')),
+    path('prepayments-table/', include((prepayments_table_urlpatterns, app_name), namespace='prepayments_table')),
+    path('request-categories/', include((request_categories_urlpatterns, app_name), namespace='request_categories')),
+    path('document-categories/', include((document_categories_urlpatterns, app_name), namespace='document_categories')),
 ]
