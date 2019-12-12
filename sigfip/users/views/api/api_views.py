@@ -46,11 +46,14 @@ def searching(request):
 
     director = QueryDirector(params=params, model=model)
     f_query = director.make()
-    print(f_query)
 
-    if f_query:
-        results = results.filter(**f_query)
+    print(f_query)
+    # if f_query:
+    #     results = results.filter(**f_query)
 
     serialized_data = serializer(results, many=True)
 
-    return Response(serialized_data.data)
+    return Response({
+        'search_type': 'loans' if search_by_loans else 'users',
+        'data': serialized_data.data
+    })

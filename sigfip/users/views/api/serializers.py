@@ -27,7 +27,39 @@ class PrepaymentTableSerializer(serializers.ModelSerializer):
         fields = ['id', 'loan_amount', 'duration', 'monthly_withdrawal', 'recoverable_third_party', 'minimal_salary']
 
 
+class CorpsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+
+        model = models.Corps
+        fields = '__all__'
+
+
+class GradeSerializer(serializers.ModelSerializer):
+    corps = CorpsSerializer(many=False, read_only=True)
+
+    class Meta:
+
+        model = models.Grade
+        fields = '__all__'
+
+
+class SmallLoanSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Request
+        fields = [
+            'id',
+            'submit_date',
+            'status',
+            'amount_awarded',
+            'monthly_payment_number',
+        ]
+
+
 class UserSerializer(serializers.ModelSerializer):
+    grade = GradeSerializer(many=False, read_only=True)
+    latest_loan = SmallLoanSerializer(many=False, read_only=True)
 
     class Meta:
 
@@ -53,6 +85,7 @@ class UserSerializer(serializers.ModelSerializer):
             'retirement_age',
             'last_loan_remaining_months',
             'last_loan_required_months',
+            'latest_loan',
         ]
 
 
@@ -63,7 +96,7 @@ class LoanSerializer(serializers.ModelSerializer):
         model = models.Request
         fields = [
             'id',
-            'date',
+            'submit_date',
             'user',
             'status',
             'amount_requested',
@@ -72,7 +105,7 @@ class LoanSerializer(serializers.ModelSerializer):
             'monthly_payment_number',
             'quota',
             'withholding',
-            'treatment_date',
+            'proceed_date',
             'post_reference',
             'category',
             'observations',
