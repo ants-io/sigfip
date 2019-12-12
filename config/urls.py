@@ -16,23 +16,25 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('users', UserViewSet)
-router.register('salary', SalaryViewSet)
+router.register('salaries', SalaryViewSet)
 router.register('corps', CorpsViewSet)
-router.register('grade', GradeViewSet)
-router.register('profession', ProfessionViewSet)
-router.register('ministry', MinistryViewSet)
-router.register('payingorg', PayingOrgViewSet)
-router.register('documentcategory', DocumentCategory)
-router.register('requestcategory', RequestCategory)
-router.register('request', Request)
-
+router.register('grades', GradeViewSet)
+router.register('professions', ProfessionViewSet)
+router.register('ministries', MinistryViewSet)
+router.register('paying_orgs', PayingOrgViewSet)
+router.register('document_categories', DocumentCategory)
+router.register('loan_categories', RequestCategory)
+router.register('loans', Request)
 
 urlpatterns = [
-    path("", login_required(TemplateView.as_view(template_name="pages/home.html")), name="home"),
-    path("search/", login_required(FilterView.as_view(
-        filterset_class=UserFilter,
-        template_name="pages/home.html"
-    )), name="search"),
+    path("",
+         login_required(TemplateView.as_view(template_name="pages/home.html")),
+         name="home"),
+    path("search/",
+         login_required(
+             FilterView.as_view(filterset_class=UserFilter,
+                                template_name="pages/home.html")),
+         name="search"),
     path(settings.ADMIN_URL, admin.site.urls),
     # User ~> App management
     path("", include("sigfip.users.urls", namespace="app")),
@@ -64,4 +66,5 @@ if settings.DEBUG:
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar
 
-        urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+        urlpatterns = [path("__debug__/", include(debug_toolbar.urls))
+                       ] + urlpatterns
