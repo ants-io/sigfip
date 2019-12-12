@@ -1,3 +1,5 @@
+from sigfip.users.api.viewsets import *
+
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -10,6 +12,21 @@ from django_filters.views import FilterView
 
 from sigfip.users.filters import UserFilter
 
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('users', UserViewSet)
+router.register('salary', SalaryViewSet)
+router.register('corps', CorpsViewSet)
+router.register('grade', GradeViewSet)
+router.register('profession', ProfessionViewSet)
+router.register('ministry', MinistryViewSet)
+router.register('payingorg', PayingOrgViewSet)
+router.register('documentcategory', DocumentCategory)
+router.register('requestcategory', RequestCategory)
+router.register('request', Request)
+
+
 urlpatterns = [
     path("", login_required(TemplateView.as_view(template_name="pages/home.html")), name="home"),
     path("search/", login_required(FilterView.as_view(
@@ -20,6 +37,7 @@ urlpatterns = [
     # User ~> App management
     path("", include("sigfip.users.urls", namespace="app")),
     path("accounts/", include("allauth.urls")),
+    path("api/", include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
