@@ -57,6 +57,9 @@ class User(AbstractUser):
     def retirement_age(self):
         return self.grade.retired_to
 
+    def latest_loan(self):
+        return self.request_set.first()
+
     def last_loan_remaining_months(self):
         return 0
 
@@ -183,8 +186,8 @@ class Request(TimeStampedField):
     quota = FloatField(_("D. Quotité = A / 3"), blank=True, null=True)
     withholding = FloatField(
         _("E. Précompte = Montant prêt / <span id='id_n_months'>C</span>"), blank=True, null=True)
-    date = DateField(_("Date de dépôt de la demande"), blank=True, null=True)
-    treatment_date = DateField(_("Date de traitement"), blank=True, null=True)
+    submit_date = DateField(_("Date de dépôt de la demande"), blank=True, null=True)
+    proceed_date = DateField(_("Date de traitement"), blank=True, null=True)
     post_reference = CharField(_("Référence courier"), max_length=20, blank=True, null=True)
     convention = CharField(_("Convention"), max_length=100, blank=True, null=True)
     category = ForeignKey(
