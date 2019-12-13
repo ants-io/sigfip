@@ -14,18 +14,6 @@ from sigfip.users.filters import UserFilter
 
 from rest_framework import routers
 
-router = routers.DefaultRouter()
-router.register('users', UserViewSet)
-router.register('salaries', SalaryViewSet)
-router.register('corps', CorpsViewSet)
-router.register('grades', GradeViewSet)
-router.register('professions', ProfessionViewSet)
-router.register('ministries', MinistryViewSet)
-router.register('paying_orgs', PayingOrgViewSet)
-router.register('document_categories', DocumentCategory)
-router.register('loan_categories', RequestCategory)
-router.register('loans', Request)
-
 urlpatterns = [
     path("",
          login_required(TemplateView.as_view(template_name="pages/home.html")),
@@ -39,7 +27,7 @@ urlpatterns = [
     # User ~> App management
     path("", include("sigfip.users.urls", namespace="app")),
     path("accounts/", include("allauth.urls")),
-    path("api/", include(router.urls)),
+    # path("api/", include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

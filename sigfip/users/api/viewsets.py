@@ -51,4 +51,4 @@ class RequestCategoryViewSet(viewsets.ModelViewSet):
 
 class RequestViewSet(viewsets.ModelViewSet):
     queryset = Request.objects.all()
-    serializer_class = Request
+    serializer_class = RequestSerializer
