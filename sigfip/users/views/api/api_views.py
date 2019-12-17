@@ -20,7 +20,8 @@ class SearchEnum(Enum):
 @api_view(['POST'])
 def searching(request):
     params = request.data
-    search_by_loans = request.data['searchCategory'] == SearchEnum.PerLoan.value
+    search_by_loans = request.data[
+        'searchCategory'] == SearchEnum.PerLoan.value
     model = models.Request \
         if search_by_loans\
         else models.User
@@ -33,16 +34,15 @@ def searching(request):
     results = []
 
     if not search_by_loans:
-        results = model.objects.annotate(
-            age=timezone.now().year - ExtractYear('birth_date__year')
-        )
+        results = model.objects.annotate(age=timezone.now().year -
+                                         ExtractYear('birth_date__year'))
     else:
-        results = model.objects.annotate(
-            age=timezone.now().year - ExtractYear('user__birth_date__year')
-        )
+        results = model.objects.annotate(age=timezone.now().year -
+                                         ExtractYear('user__birth_date__year'))
 
     if q_query:
         results = results.filter(q_query)
+    # end
 
     director = QueryDirector(params=params, model=model)
     f_query = director.make()
