@@ -1,54 +1,55 @@
-from ..models import User
-from .serializers import *
+from .. import models
+from . import serializers
+from ..views.api import serializers as srv2
 
 from rest_framework import viewsets
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset = models.User.objects.all()
+    serializer_class = srv2.UserSerializer
 
 
 class SalaryViewSet(viewsets.ModelViewSet):
-    queryset = Salary.objects.all()
-    serializer_class = SalarySerializer
+    queryset = models.Salary.objects.all()
+    serializer_class = serializers.SalarySerializer
 
 
 class CorpsViewSet(viewsets.ModelViewSet):
-    queryset = Corps.objects.all()
-    serializer_class = CorpsSerializer
+    queryset = models.Corps.objects.all()
+    serializer_class = serializers.CorpsSerializer
 
 
 class GradeViewSet(viewsets.ModelViewSet):
-    queryset = Grade.objects.all()
-    serializer_class = GradeSerializer
+    queryset = models.Grade.objects.all()
+    serializer_class = serializers.GradeSerializer
 
 
 class ProfessionViewSet(viewsets.ModelViewSet):
-    queryset = Profession.objects.all()
-    serializer_class = ProfessionSerializer
+    queryset = models.Profession.objects.all()
+    serializer_class = serializers.ProfessionSerializer
 
 
 class MinistryViewSet(viewsets.ModelViewSet):
-    queryset = Ministry.objects.all()
-    serializer_class = MinistrySerializer
+    queryset = models.Ministry.objects.all()
+    serializer_class = serializers.MinistrySerializer
 
 
 class PayingOrgViewSet(viewsets.ModelViewSet):
-    queryset = PayingOrg.objects.all()
-    serializer_class = PayingOrgSerializer
+    queryset = models.PayingOrg.objects.all()
+    serializer_class = serializers.PayingOrgSerializer
 
 
 class DocumentCategoryViewSet(viewsets.ModelViewSet):
-    queryset = DocumentCategory.objects.all()
-    serializer_class = DocumentCategory
+    queryset = models.DocumentCategory.objects.all()
+    serializer_class = serializers.DocumentCategory
 
 
 class RequestCategoryViewSet(viewsets.ModelViewSet):
-    queryset = RequestCategory.objects.all()
-    serializer_class = RequestCategorySerializer
+    queryset = models.RequestCategory.objects.all()
+    serializer_class = serializers.RequestCategorySerializer
 
 
 class RequestViewSet(viewsets.ModelViewSet):
-    queryset = Request.objects.all()
-    serializer_class = RequestSerializer
+    queryset = models.Request.objects.all()
+    serializer_class = srv2.LoanSerializer
