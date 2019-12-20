@@ -194,7 +194,7 @@ class Request(TimeStampedField):
     """
     Application for user to have a loan.
     """
-    STATUS_CHOICES = Choices('pending', 'accepted', 'archived', 'cancel',
+    STATUS_CHOICES = Choices('pending', 'accepted', 'archived', 'cancelled',
                              'frozen', 'rejected')
 
     amount_requested = FloatField(_("Montant demandé"))
@@ -237,6 +237,10 @@ class Request(TimeStampedField):
 
     class Meta:
         ordering = ['created_at']
+
+    @property
+    def documents(self):
+        return self.document_set.all()
 
     @property
     def loan_file(self):
