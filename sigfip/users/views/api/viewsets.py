@@ -26,7 +26,8 @@ class LoanRequestDocumentViewSet(viewsets.ModelViewSet):
         self.object = self.get_object()
 
         documents = self.object.documents.all()
-        serialized_documents = serializers.DocumentCategorySerializer(documents, many=True)
+        serialized_documents = serializers.DocumentCategorySerializer(
+            documents, many=True)
 
         return Response(serialized_documents.data)
 

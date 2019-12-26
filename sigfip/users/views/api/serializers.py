@@ -78,6 +78,18 @@ class DocumentSerializer(serializers.ModelSerializer):
         ]
 
 
+class ExtraSmallLoanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Request
+        fields = [
+            'id',
+            'submit_date',
+            'proceed_date',
+            'status',
+            'amount_awarded',
+        ]
+
+
 class SmallLoanSerializer(serializers.ModelSerializer):
     category = RequestCategorySerializer(many=False, read_only=True)
 
@@ -115,9 +127,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class LoanSerializer(serializers.ModelSerializer):
-    user = UserSerializer(many=False, read_only=True)
-    treatment_agent = UserSerializer(many=False, read_only=True)
-    category = RequestCategorySerializer(many=False, read_only=True)
+    # user = UserSerializer(many=False, read_only=True)
+    # treatment_agent = UserSerializer(many=False, read_only=True)
+    # category = RequestCategorySerializer(many=False, read_only=True)
     documents = DocumentSerializer(many=True, read_only=True)
 
     class Meta:

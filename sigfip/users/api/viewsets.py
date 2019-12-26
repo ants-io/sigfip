@@ -1,3 +1,9 @@
+import datetime
+from datetime import timedelta
+
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
 from .. import models
 from . import serializers
 from ..views.api import serializers as srv2
@@ -53,3 +59,31 @@ class RequestCategoryViewSet(viewsets.ModelViewSet):
 class RequestViewSet(viewsets.ModelViewSet):
     queryset = models.Request.objects.all()
     serializer_class = srv2.LoanSerializer
+
+    @action(detail=False)
+    def extract_by_period(self, request, *args, **kwargs):
+        start_at = request.GET.get('start_at')
+        end_at = request.GET.get('end_at')
+        extract_by = request.GET.get('extract_by')
+        delta_day = timedelta(days=1)
+
+        if start_at:
+            start_at = datetime.datetime.strptime(
+                start_at, "%Y-%m-%d").date() - delta_day
+
+        if end_at:
+            end_at = datetime.datetime.strptime(end_at,
+                                                "%Y-%m-%d").date() + delta_day
+
+        print(f"start_at = {start_at}, end_at = {end_at}")
+        if extract_by == 'submit_data':
+            loans = models.Request.objects.filter(
+                submit_date__range=[start_at, end_at])
+
+        if extract_by == 'proceed_date':
+            loans = models.Request.objects.filter(
+                proceed_date__range=[start_at, end_at])
+        print("loans = ", loans)
+
+        serialized_loans = srv2.ExtraSmallLoanSerializer(loans, many=True)
+        return Response(serialized_loans.data)
