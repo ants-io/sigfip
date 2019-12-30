@@ -13,6 +13,7 @@ from django_filters.views import FilterView
 from sigfip.users.filters import UserFilter
 
 from rest_framework import routers
+from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     path("",
@@ -27,6 +28,7 @@ urlpatterns = [
     # User ~> App management
     path("", include("sigfip.users.urls", namespace="app")),
     path("accounts/", include("allauth.urls")),
+    path('token/', obtain_jwt_token),
     # path("api/", include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
