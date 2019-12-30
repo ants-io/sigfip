@@ -83,8 +83,7 @@ class ExtraSmallLoanSerializer(serializers.ModelSerializer):
         model = models.Request
         fields = [
             'id',
-            'submit_date',
-            'proceed_date',
+            'created_at',
             'status',
             'amount_awarded',
         ]

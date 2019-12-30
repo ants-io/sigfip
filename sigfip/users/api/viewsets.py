@@ -66,100 +66,30 @@ class RequestViewSet(viewsets.ModelViewSet):
     def extract_by_period(self, request, *args, **kwargs):
         start_at = request.GET.get('start_at')
         end_at = request.GET.get('end_at')
-        extract_by = request.GET.get('extract_by')
-        delta_day = timedelta(days=1)
+        # extract_by = request.GET.get('extract_by')
+        # delta_day = timedelta(days=1)
 
         if start_at:
-            start_at = datetime.datetime.strptime(
-                start_at, "%Y-%m-%d").date() - delta_day
+            start_at = datetime.datetime.strptime(start_at, "%Y-%m-%d").date()
         else:
             start_at = datetime.date.today() - timedelta(days=31)
 
         if end_at:
-            end_at = datetime.datetime.strptime(end_at,
-                                                "%Y-%m-%d").date() + delta_day
+            end_at = datetime.datetime.strptime(end_at, "%Y-%m-%d").date()
         else:
-            end_at = datetime.date.today() + delta_day
+            end_at = datetime.date.today()
 
-        if extract_by == 'submit_data':
-            loans = models.Request.objects.filter(
-                submit_date__range=[start_at, end_at])
+        # if extract_by == 'submit_data':
+        #     loans = models.Request.objects.filter(
+        #         submit_date__range=[start_at, end_at])
 
-        if extract_by == 'proceed_data':
-            loans = models.Request.objects.filter(
-                proceed_date__range=[start_at, end_at])
+        # if extract_by == 'proceed_data':
+        #     loans = models.Request.objects.filter(
+        #         proceed_date__range=[start_at, end_at])
 
-        data = []
+        loans = models.Request.objects.filter(
+            created_at__range=[start_at, end_at])
+
         serialized_loans = srv2.ExtraSmallLoanSerializer(loans, many=True)
-        for d in serialized_loans.data:
-            d.update({"type": extract_by})
-            data.append(d)
-        return Response(data)
 
-    @action(detail=False)
-    def recap(self, request, *args, **kwargs):
-        today = datetime.date.today()
-        year = request.GET.get('year') if request.GET.get(
-            'year') else today.year
-        fields = ['submit_date', 'proceed_date']
-        months_data = {
-            "1": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-            "2": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-            "3": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-            "4": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-            "5": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-            "6": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-            "7": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-            "8": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-            "9": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-            "10": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-            "11": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-            "12": {
-                'submit_date': 0,
-                'proceed_date': 0
-            },
-        }
-        for field in fields:
-            year_filter = {f'{field}__year': year}
-            data = models.Request.objects\
-                .filter(**year_filter)\
-                .annotate(month=ExtractMonth(f'{field}__month'))\
-                .values('month').annotate(c=Count('id'))\
-                .order_by()
-            for d in data:
-                months_data[str(d['month'])].update({field: d['c']})
-
-        return Response(months_data)
+        return Response(serialized_loans.data)

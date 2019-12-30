@@ -21,6 +21,7 @@ django-compressor==2.3  # https://github.com/django-compressor/django-compressor
 django-redis==4.10.0  # https://github.com/niwinz/django-redis
 django-filter==2.2.0 # https://django-filter.readthedocs.io/en/master/guide/usage.html#the-model
 django-cors-headers==3.2.0  # https://github.com/adamchainz/django-cors-headers
+djangorestframework-jwt==1.11.0  # https://github.com/jpadilla/django-rest-framework-jwt
 
 # Django REST Framework
 djangorestframework==3.10.3  # https://github.com/encode/django-rest-framework

@@ -29,6 +29,8 @@ class RequestAdmin(admin.ModelAdmin):
         "monthly_payment_number",
         "submit_date",
         "proceed_date",
+        "created_at",
+        "updated_at",
         "category",
         "status",
         "user",
