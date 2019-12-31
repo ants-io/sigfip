@@ -9,8 +9,12 @@ def jwt_payload_handler(user):
     """
     return {
         'user_id': str(user.pk),
+        'id': user.id,
+        'email': user.email,
+        'username': user.username,
         'first_name': user.first_name,
         'last_name': user.last_name,
+        'exp': datetime.utcnow() + api_settings.JWT_EXPIRATION_DELTA,
     }
 
 
@@ -21,7 +25,12 @@ def jwt_response_payload_handler(token, user=None, request=None):
     """
     return {
         'token': token,
-        'first_name': user.first_name,
-        'last_name': user.last_name,
-        'user_id': str(user.pk),
+        'user': {
+            'id': user.id,
+            'email': user.email,
+            'user_id': str(user.pk),
+            'username': user.username,
+            'last_name': user.last_name,
+            'first_name': user.first_name,
+        }
     }
