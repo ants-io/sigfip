@@ -47,9 +47,9 @@ def searching(request):
     director = QueryDirector(params=params, model=model)
     f_query = director.make()
 
-    print(f_query)
-    # if f_query:
-    #     results = results.filter(**f_query)
+    print(models, f_query)
+    if f_query:
+        results = results.filter(**f_query)
 
     serialized_data = serializer(results, many=True)
 

@@ -15,6 +15,7 @@ router.register('loan_categories', viewsets.LoanRequestDocumentViewSet)
 router.register('ministries', vws.MinistryViewSet)
 router.register('paying_orgs', vws.PayingOrgViewSet)
 router.register('prepayments_table', viewsets.PrepaymentTableViewSet)
+router.register('slips', vws.SlipViewSet)
 router.register('users', vws.UserViewSet)
 router.register('professions', vws.ProfessionViewSet)
 

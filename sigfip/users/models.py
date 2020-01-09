@@ -51,7 +51,7 @@ class User(AbstractUser):
     postal_box = CharField(_("Boite postale"), max_length=20)
     phone = CharField(_("Mobile / Téléphone"), max_length=20)
     profession = ForeignKey('Profession',
-                            verbose_name=_("Ministère"),
+                            verbose_name=_("Profession"),
                             blank=True,
                             null=True,
                             on_delete=models.CASCADE)
@@ -190,6 +190,12 @@ class RequestCategory(NameField, TimeStampedField):
         verbose_name_plural = 'request_categories'
 
 
+class Slip(NameField, TimeStampedField):
+
+    classed_date = DateField(_("Date de classification"))
+    responsible = ForeignKey(User, on_delete=models.CASCADE)
+
+
 class Request(TimeStampedField):
     """
     Application for user to have a loan.
@@ -230,6 +236,9 @@ class Request(TimeStampedField):
     observations = TextField(_("Observations"), blank=True)
     status = StatusField(choices_name='STATUS_CHOICES')
     user = ForeignKey(User, verbose_name=_("Agent"), on_delete=models.CASCADE)
+    slip = ForeignKey(Slip,
+                      verbose_name=_("Bordereau"),
+                      on_delete=models.CASCADE)
     treatment_agent = ForeignKey(User,
                                  verbose_name=_("Agent de traitement"),
                                  related_name='treatment_agent',

@@ -55,3 +55,9 @@ class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
         fields = '__all__'
+
+
+class SlipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Slip
+        fields = ['id', 'name', 'description', 'classed_date', 'responsible']

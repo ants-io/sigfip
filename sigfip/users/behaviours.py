@@ -1,7 +1,11 @@
 from datetime import date
 
 from django.db import models
-from django.db.models import (CharField, DateTimeField, TextField, )
+from django.db.models import (
+    CharField,
+    DateTimeField,
+    TextField,
+)
 from django.utils.translation import ugettext_lazy as _
 
 from model_utils.models import TimeStampedModel
@@ -13,7 +17,7 @@ class NameField(models.Model):
     """
 
     name = CharField(_("Nom"), max_length=255)
-    description = TextField(_("Description"))
+    description = TextField(_("Description"), blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -40,4 +44,5 @@ def calculate_age(born):
     if not born:
         return None
     today = date.today()
-    return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+    return today.year - born.year - ((today.month, today.day) <
+                                     (born.month, born.day))

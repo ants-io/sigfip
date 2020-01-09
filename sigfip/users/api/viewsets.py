@@ -58,6 +58,11 @@ class RequestCategoryViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.RequestCategorySerializer
 
 
+class SlipViewSet(viewsets.ModelViewSet):
+    queryset = models.Slip.objects.all()
+    serializer_class = serializers.SlipSerializer
+
+
 class RequestViewSet(viewsets.ModelViewSet):
     queryset = models.Request.objects.all()
     serializer_class = srv2.LoanSerializer
@@ -93,3 +98,11 @@ class RequestViewSet(viewsets.ModelViewSet):
         serialized_loans = srv2.ExtraSmallLoanSerializer(loans, many=True)
 
         return Response(serialized_loans.data)
+
+    @action(detail=False)
+    def queue(self, request, *args, **kwargs):
+        size = request.GET.get('size', '20')
+        users = models.User.objects.filter(request__status='pending').distinct(
+        ).order_by('request__submit_date')
+        serialized_users = srv2.ExtraSmallUserSerializer(users, many=True)
+        return Response(serialized_users.data)

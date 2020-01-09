@@ -125,9 +125,34 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
+class SmallUserSerializer(serializers.ModelSerializer):
+    grade = GradeSerializer(many=False, read_only=True)
+    latest_loan = SmallLoanSerializer(many=False, read_only=True)
+
+    class Meta:
+
+        model = models.User
+        fields = [
+            'id', 'first_name', 'last_name', 'grade', 'registration_number',
+            'latest_loan'
+        ]
+
+
+class ExtraSmallUserSerializer(serializers.ModelSerializer):
+    class Meta:
+
+        model = models.User
+        fields = [
+            'id',
+            'first_name',
+            'last_name',
+            'registration_number',
+        ]
+
+
 class LoanSerializer(serializers.ModelSerializer):
-    # user = UserSerializer(many=False, read_only=True)
-    # treatment_agent = UserSerializer(many=False, read_only=True)
+    user = SmallUserSerializer(many=False, read_only=True)
+    treatment_agent = UserSerializer(many=False, read_only=True)
     # category = RequestCategorySerializer(many=False, read_only=True)
     documents = DocumentSerializer(many=True, read_only=True)
 
@@ -138,7 +163,7 @@ class LoanSerializer(serializers.ModelSerializer):
             'amount_awarded', 'amount_to_repay', 'monthly_payment_number',
             'quota', 'withholding', 'proceed_date', 'post_reference',
             'category', 'observations', 'status', 'treatment_agent',
-            'documents', 'convention'
+            'documents', 'convention', 'slip'
         ]
 
     def create(self, validate_data):

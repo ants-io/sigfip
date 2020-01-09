@@ -15,9 +15,16 @@ class UserAdmin(auth_admin.UserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
     fieldsets = (("User", {
-        "fields": ('birth_date', )
+        "fields": (
+            'birth_date',
+            "profession",
+            "grade",
+        )
     }), ) + auth_admin.UserAdmin.fieldsets
-    list_display = ["username", "first_name", "last_name", "is_superuser"]
+    list_display = [
+        "username", "first_name", "last_name", "profession", "grade",
+        "is_superuser"
+    ]
     search_fields = ["first_name", "last_name", "email"]
 
 
@@ -35,4 +42,14 @@ class RequestAdmin(admin.ModelAdmin):
         "status",
         "user",
         "treatment_agent",
+    ]
+
+
+@admin.register(models.Slip)
+class SlipAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'classed_date',
+        'description',
+        'responsible',
     ]
