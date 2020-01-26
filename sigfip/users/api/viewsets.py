@@ -71,8 +71,6 @@ class RequestViewSet(viewsets.ModelViewSet):
     def extract_by_period(self, request, *args, **kwargs):
         start_at = request.GET.get('start_at')
         end_at = request.GET.get('end_at')
-        # extract_by = request.GET.get('extract_by')
-        # delta_day = timedelta(days=1)
 
         if start_at:
             start_at = datetime.datetime.strptime(start_at, "%Y-%m-%d").date()
@@ -83,14 +81,6 @@ class RequestViewSet(viewsets.ModelViewSet):
             end_at = datetime.datetime.strptime(end_at, "%Y-%m-%d").date()
         else:
             end_at = datetime.date.today()
-
-        # if extract_by == 'submit_data':
-        #     loans = models.Request.objects.filter(
-        #         submit_date__range=[start_at, end_at])
-
-        # if extract_by == 'proceed_data':
-        #     loans = models.Request.objects.filter(
-        #         proceed_date__range=[start_at, end_at])
 
         loans = models.Request.objects.filter(
             created_at__range=[start_at, end_at])
