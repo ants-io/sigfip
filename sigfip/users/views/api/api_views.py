@@ -55,6 +55,6 @@ def searching(request):
     return Response({
         'search_type': 'loans' if search_by_loans else 'users',
         'data': serialized_data.data,
-        'query': q_query,
+        'query': str(q_query),
         'filters': f_query,
     })
