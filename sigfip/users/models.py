@@ -86,7 +86,7 @@ class User(AbstractUser):
         return f'{age} ans' if age else '_'
 
     def retirement_age(self):
-        return self.grade.retired_to
+        return self.grade.retired_to if self.grade else 60
 
     def latest_loan(self):
         return self.request_set.first()
