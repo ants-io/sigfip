@@ -47,21 +47,37 @@ class User(AbstractUser):
                     max_length=100)
     retirement_age = IntegerField(_("Age de la retraite"), default=60)
     salary = FloatField(_("Salaire"), default=0)
-    address = TextField(_("Adresse"))
-    postal_box = CharField(_("Boite postale"), max_length=20)
-    phone = CharField(_("Mobile / Téléphone"), max_length=20)
+    address = TextField(
+        _("Adresse"),
+        blank=True,
+        null=True,
+    )
+    postal_box = CharField(_("Boite postale"),
+                           blank=True,
+                           null=True,
+                           max_length=20)
+    phone = CharField(_("Mobile / Téléphone"),
+                      blank=True,
+                      null=True,
+                      max_length=20)
     profession = ForeignKey('Profession',
                             verbose_name=_("Profession"),
                             blank=True,
                             null=True,
                             on_delete=models.CASCADE)
     grade = ForeignKey('Grade',
+                       blank=True,
+                       null=True,
                        verbose_name=_("Grade"),
                        on_delete=models.CASCADE)
     ministry = ForeignKey('Ministry',
+                          blank=True,
+                          null=True,
                           verbose_name=_("Ministère"),
                           on_delete=models.CASCADE)
     paying_org = ForeignKey('PayingOrg',
+                            blank=True,
+                            null=True,
                             verbose_name=_("Organisme payeur"),
                             on_delete=models.CASCADE)
 
