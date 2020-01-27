@@ -1,0 +1,32 @@
+[
+  {
+    "model": "users.payingorg",
+    "pk": 1,
+    "fields": {
+      "name": "Autre",
+      "description": "_",
+      "created_at": "2019-10-31T18:10:19.223Z",
+      "updated_at": "2019-11-07T16:09:53.293Z"
+    }
+  },
+  {
+    "model": "users.payingorg",
+    "pk": 2,
+    "fields": {
+      "name": "CEP",
+      "description": "Centre des Etablissements Publics.",
+      "created_at": "2019-10-31T18:10:33.084Z",
+      "updated_at": "2019-11-07T16:09:36.239Z"
+    }
+  },
+  {
+    "model": "users.payingorg",
+    "pk": 3,
+    "fields": {
+      "name": "CCAP",
+      "description": "Centre de comptabilit\u00e9 Andr\u00e9 Peytavin.",
+      "created_at": "2019-10-31T18:10:41.501Z",
+      "updated_at": "2019-11-07T16:09:02.945Z"
+    }
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "model": "users.documentcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Bulletin de solde",
+      "description": "__ build",
+      "created_at": "2019-10-31T18:46:43.300Z",
+      "updated_at": "2019-12-22T15:54:55.932Z",
+      "required_number": 2
+    }
+  },
+  {
+    "model": "users.documentcategory",
+    "pk": 7,
+    "fields": {
+      "name": "Fiche de renseignements",
+      "description": "FDR",
+      "created_at": "2019-11-07T16:15:06.463Z",
+      "updated_at": "2019-11-07T16:15:06.463Z",
+      "required_number": 1
+    }
+  },
+  {
+    "model": "users.documentcategory",
+    "pk": 6,
+    "fields": {
+      "name": "Convention de pr\u00eat",
+      "description": "CDP",
+      "created_at": "2019-11-07T16:13:33.957Z",
+      "updated_at": "2019-11-07T16:13:33.957Z",
+      "required_number": 3
+    }
+  },
+  {
+    "model": "users.documentcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Enveloppes timbr\u00e9es",
+      "description": "_",
+      "created_at": "2019-10-31T19:07:31.813Z",
+      "updated_at": "2019-10-31T19:07:31.813Z",
+      "required_number": 2
+    }
+  },
+  {
+    "model": "users.documentcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Demande manuscrite",
+      "description": "__",
+      "created_at": "2019-10-31T19:06:58.694Z",
+      "updated_at": "2019-10-31T19:06:58.695Z",
+      "required_number": 2
+    }
+  },
+  {
+    "model": "users.documentcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Photocopie CNI",
+      "description": "_",
+      "created_at": "2019-10-31T19:06:35.191Z",
+      "updated_at": "2019-10-31T19:06:35.191Z",
+      "required_number": 2
+    }
+  }
+]

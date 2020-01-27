@@ -1,0 +1,52 @@
+[
+  {
+    "model": "users.grade",
+    "pk": 1,
+    "fields": {
+      "name": "Surveillant de Prison",
+      "description": "___",
+      "retired_to": 55,
+      "corps": 2
+    }
+  },
+  {
+    "model": "users.grade",
+    "pk": 7,
+    "fields": {
+      "name": "grade ...",
+      "description": "fdfds",
+      "retired_to": 55,
+      "corps": 7
+    }
+  },
+  {
+    "model": "users.grade",
+    "pk": 5,
+    "fields": {
+      "name": "Lieutenant des Eaux et For\u00eats",
+      "description": "_",
+      "retired_to": 60,
+      "corps": 5
+    }
+  },
+  {
+    "model": "users.grade",
+    "pk": 3,
+    "fields": {
+      "name": "Pr\u00e9pos\u00e9 des Douanes",
+      "description": "_",
+      "retired_to": 55,
+      "corps": 3
+    }
+  },
+  {
+    "model": "users.grade",
+    "pk": 2,
+    "fields": {
+      "name": "Brigadier de Prison",
+      "description": "_",
+      "retired_to": 55,
+      "corps": 2
+    }
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "model": "users.requestcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Demande de pr\u00eat au logement",
+      "description": "_",
+      "created_at": "2019-10-31T18:29:36.499Z",
+      "updated_at": "2020-01-26T19:38:54.014Z",
+      "documents": [1, 2, 3, 4]
+    }
+  },
+  {
+    "model": "users.requestcategory",
+    "pk": 7,
+    "fields": {
+      "name": "Demande d'annulation de pr\u00eat",
+      "description": "La demande a ete d\u00e9pos\u00e9e mais pas encore accord\u00e9.",
+      "created_at": "2019-11-07T16:53:41.822Z",
+      "updated_at": "2019-11-07T16:53:41.823Z",
+      "documents": [1]
+    }
+  },
+  {
+    "model": "users.requestcategory",
+    "pk": 6,
+    "fields": {
+      "name": "Demande d'annulation convention",
+      "description": "Demande accord\u00e9, mais la personne n'a pas utilis\u00e9.",
+      "created_at": "2019-11-07T16:52:19.210Z",
+      "updated_at": "2019-11-07T16:52:19.210Z",
+      "documents": [7]
+    }
+  },
+  {
+    "model": "users.requestcategory",
+    "pk": 5,
+    "fields": {
+      "name": "Demande de remise Gracieuse",
+      "description": "_",
+      "created_at": "2019-11-07T16:50:46.729Z",
+      "updated_at": "2019-11-07T16:50:46.729Z",
+      "documents": [7]
+    }
+  },
+  {
+    "model": "users.requestcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Demande de pr\u00eat divers",
+      "description": "_",
+      "created_at": "2019-10-31T18:30:23.745Z",
+      "updated_at": "2019-11-07T16:15:40.008Z",
+      "documents": [2, 3, 6, 7]
+    }
+  },
+  {
+    "model": "users.requestcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Demande de pr\u00eat d'\u00e9quipement",
+      "description": "_",
+      "created_at": "2019-10-31T18:29:50.943Z",
+      "updated_at": "2019-11-07T16:11:35.357Z",
+      "documents": [2, 4]
+    }
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "model": "users.corps",
+    "pk": 2,
+    "fields": {
+      "name": "ADMINISTRATION PENITENTIAIRE",
+      "description": "_fdsfdsafsfsadf"
+    }
+  },
+  {
+    "model": "users.corps",
+    "pk": 13,
+    "fields": {
+      "name": "ADMINISTRATION",
+      "description": "_"
+    }
+  },
+  {
+    "model": "users.corps",
+    "pk": 12,
+    "fields": {
+      "name": "ENSEIGNEMENT",
+      "description": "_"
+    }
+  },
+  {
+    "model": "users.corps",
+    "pk": 11,
+    "fields": {
+      "name": "SANTE",
+      "description": "_"
+    }
+  },
+  {
+    "model": "users.corps",
+    "pk": 10,
+    "fields": {
+      "name": "SERVICE D'HYGIENE",
+      "description": "_"
+    }
+  },
+  {
+    "model": "users.corps",
+    "pk": 9,
+    "fields": {
+      "name": "POLICE",
+      "description": "_"
+    }
+  },
+  {
+    "model": "users.corps",
+    "pk": 8,
+    "fields": {
+      "name": "SAPEURS POMPIERS",
+      "description": "_"
+    }
+  },
+  {
+    "model": "users.corps",
+    "pk": 3,
+    "fields": {
+      "name": "DOUANE",
+      "description": "_"
+    }
+  },
+  {
+    "model": "users.corps",
+    "pk": 7,
+    "fields": {
+      "name": "ARMEE",
+      "description": "_"
+    }
+  },
+  {
+    "model": "users.corps",
+    "pk": 6,
+    "fields": {
+      "name": "GENDARMERIE",
+      "description": "_"
+    }
+  },
+  {
+    "model": "users.corps",
+    "pk": 5,
+    "fields": {
+      "name": "EAUX ET FORETS",
+      "description": "_"
+    }
+  }
+]

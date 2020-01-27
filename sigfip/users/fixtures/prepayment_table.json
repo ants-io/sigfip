@@ -1,0 +1,67 @@
+[
+  {
+    "model": "users.prepaymenttable",
+    "pk": 5,
+    "fields": {
+      "created_at": "2019-11-05T12:35:26.564Z",
+      "updated_at": "2019-11-05T12:36:35.697Z",
+      "loan_amount": 3000000.0,
+      "duration": 5.0,
+      "monthly_withdrawal": 50000,
+      "recoverable_third_party": 150000.0,
+      "minimal_salary": 180000.0
+    }
+  },
+  {
+    "model": "users.prepaymenttable",
+    "pk": 4,
+    "fields": {
+      "created_at": "2019-11-05T12:35:12.209Z",
+      "updated_at": "2019-11-05T12:35:12.209Z",
+      "loan_amount": 2500000.0,
+      "duration": 5.0,
+      "monthly_withdrawal": 41667,
+      "recoverable_third_party": 125001.0,
+      "minimal_salary": 155001.0
+    }
+  },
+  {
+    "model": "users.prepaymenttable",
+    "pk": 3,
+    "fields": {
+      "created_at": "2019-11-05T12:34:27.339Z",
+      "updated_at": "2019-11-05T12:34:27.340Z",
+      "loan_amount": 2000000.0,
+      "duration": 4.0,
+      "monthly_withdrawal": 41667,
+      "recoverable_third_party": 125001.0,
+      "minimal_salary": 155001.0
+    }
+  },
+  {
+    "model": "users.prepaymenttable",
+    "pk": 2,
+    "fields": {
+      "created_at": "2019-11-05T12:33:46.998Z",
+      "updated_at": "2019-11-05T12:33:46.999Z",
+      "loan_amount": 1500000.0,
+      "duration": 4.0,
+      "monthly_withdrawal": 31250,
+      "recoverable_third_party": 93750.0,
+      "minimal_salary": 123750.0
+    }
+  },
+  {
+    "model": "users.prepaymenttable",
+    "pk": 1,
+    "fields": {
+      "created_at": "2019-11-05T12:32:50.339Z",
+      "updated_at": "2019-11-05T12:32:50.339Z",
+      "loan_amount": 1000000.0,
+      "duration": 4.0,
+      "monthly_withdrawal": 20834,
+      "recoverable_third_party": 62502.0,
+      "minimal_salary": 92502.0
+    }
+  }
+]

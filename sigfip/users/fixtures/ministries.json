@@ -1,0 +1,18 @@
+[
+  {
+    "model": "users.ministry",
+    "pk": 2,
+    "fields": {
+      "name": "Primature",
+      "description": "_"
+    }
+  },
+  {
+    "model": "users.ministry",
+    "pk": 1,
+    "fields": {
+      "name": "Pr\u00e9sidence de la R\u00e9publique.",
+      "description": "_"
+    }
+  }
+]

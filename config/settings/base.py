@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
     "django_filters",
     "rest_framework",
     "corsheaders",
+    "fixture_magic",
 ]
 
 LOCAL_APPS = [
