@@ -47,7 +47,6 @@ def searching(request):
     director = QueryDirector(params=params, model=model)
     f_query = director.make()
 
-    print(models, f_query)
     if f_query:
         results = results.filter(**f_query)
 

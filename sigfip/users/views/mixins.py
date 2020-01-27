@@ -7,11 +7,7 @@ from .. import forms, models
 
 
 class PageMixin(object):
-    page = {
-        'title': '',
-        'namespaces': {},
-        'field_list': []
-    }
+    page = {'title': '', 'namespaces': {}, 'field_list': []}
 
     def get_page(self):
         return self.page
@@ -40,17 +36,15 @@ class PageMixin(object):
 
 
 class UserDetailMixin(object):
-
     @cached_property
     def forms(self):
-        return {
-            'loan_form': forms.LoanForm()
-        }
+        return {'loan_form': forms.LoanForm()}
 
     def post(self, request, *args, **kwargs):
 
         if 'update_loan' in request.POST:
-            form = forms.LoanDetailForm(request.POST, instance=self.get_object())
+            form = forms.LoanDetailForm(request.POST,
+                                        instance=self.get_object())
 
         if 'add_load' in request.POST:
             form = forms.LoanForm(request.POST)
@@ -66,17 +60,17 @@ class UserDetailMixin(object):
         if form.is_valid():
             model = form.save(commit=False)
 
-            messages.add_message(
-                request, messages.SUCCESS, _("INFO: La demande a bien été ajoutée.")
-            )
+            messages.add_message(request, messages.SUCCESS,
+                                 _("INFO: La demande a bien été ajoutée."))
 
             if not model.monthly_payment_number:
-                line = models.PrepaymentTable.objects.get(loan_amount=model.amount_requested)
+                line = models.PrepaymentTable.objects.get(
+                    loan_amount=model.amount_requested)
                 if model.user.salary < line.minimal_salary:
                     messages.add_message(
-                        request, messages.ERROR, _(
-                            "INFO: Le salaire minimal authorisé pour ce prêt est de {line.minimal_salary} F CFA.")
-                    )
+                        request, messages.ERROR,
+                        _("INFO: Le salaire minimal authorisé pour ce prêt est de {line.minimal_salary} F CFA."
+                          ))
                     return self.get(request, *args, **kwargs)
 
                 # TODO: This treatment has to be done every time we trying to save object state.
@@ -96,9 +90,7 @@ class UserDetailMixin(object):
 
         if 'add_load' in request.POST:
             for document_id, provided_number, reference, document_date in zip(
-                    document_ids,
-                    provided_numbers,
-                    references,
+                    document_ids, provided_numbers, references,
                     document_dates):
                 doc_form = forms.DocumentForm({
                     'request': model.id,
@@ -114,9 +106,7 @@ class UserDetailMixin(object):
 
         if 'update_loan' in request.POST:
             for document_id, provided_number, reference, document_date in zip(
-                    document_ids,
-                    provided_numbers,
-                    references,
+                    document_ids, provided_numbers, references,
                     document_dates):
                 doc = models.Document.objects.get(pk=document_id)
                 doc.provided_number = provided_number
@@ -128,9 +118,6 @@ class UserDetailMixin(object):
 
 
 class LoanDetailMixin(object):
-
     @cached_property
     def forms(self):
-        return {
-            'form': forms.LoanDetailForm(instance=self.get_object())
-        }
+        return {'form': forms.LoanDetailForm(instance=self.get_object())}

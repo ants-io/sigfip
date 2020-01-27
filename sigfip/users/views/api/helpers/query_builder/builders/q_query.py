@@ -28,7 +28,6 @@ class QQueryBuilder(QueryBuilder):
 
         if not self._q:
             return
-        print('self._q = ', self._q)
         query = Q()
         for attr in self._params:
             key = f'{attr}__{self._operator}' \

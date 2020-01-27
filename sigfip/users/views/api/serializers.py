@@ -179,10 +179,10 @@ class LoanSerializer(serializers.ModelSerializer):
                 line = models.PrepaymentTable.objects.get(
                     loan_amount=model.amount_requested)
                 if model.user.salary < line.minimal_salary:
-                    print(
+                    return {
+                        "error":
                         "INFO: Le salaire minimal authorisé pour ce prêt est de {line.minimal_salary} F CFA."
-                    )
-                    return
+                    }
                 model.monthly_payment_number = line.duration * 12
             model.amount_awarded = model.amount_requested
             model.amount_to_repay = model.amount_awarded
