@@ -189,7 +189,7 @@ class LoanSerializer(serializers.ModelSerializer):
             model.amount_to_repay = model.amount_awarded
             model.quota = model.user.salary / 3
             model.withholding = model.amount_awarded / model.monthly_payment_number
-            model.treatment_agent_id = data['treatment_agent']
+            # model.treatment_agent_id = data['treatment_agent']
             model.save()
 
             for document in data['documents']:
