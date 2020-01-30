@@ -253,6 +253,8 @@ class Request(TimeStampedField):
     status = StatusField(choices_name='STATUS_CHOICES')
     user = ForeignKey(User, verbose_name=_("Agent"), on_delete=models.CASCADE)
     slip = ForeignKey(Slip,
+                      blank=True,
+                      null=True,
                       verbose_name=_("Bordereau"),
                       on_delete=models.CASCADE)
     treatment_agent = ForeignKey(User,

@@ -53,3 +53,18 @@ class SlipAdmin(admin.ModelAdmin):
         'description',
         'responsible',
     ]
+
+
+@admin.register(models.DocumentCategory)
+class DocumentCategoryAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'name',
+        'description',
+        'required_number',
+    ]
+
+
+@admin.register(models.RequestCategory)
+class RequestCategoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'description']
