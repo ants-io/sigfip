@@ -258,6 +258,8 @@ class Request(TimeStampedField):
                       verbose_name=_("Bordereau"),
                       on_delete=models.CASCADE)
     treatment_agent = ForeignKey(User,
+                                 blank=True,
+                                 null=True,
                                  verbose_name=_("Agent de traitement"),
                                  related_name='treatment_agent',
                                  on_delete=models.CASCADE)
