@@ -160,11 +160,11 @@ class LoanSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Request
         fields = [
-            'id', 'username', 'submit_date', 'user', 'status',
-            'amount_requested', 'amount_awarded', 'amount_to_repay',
-            'monthly_payment_number', 'quota', 'withholding', 'proceed_date',
-            'post_reference', 'category', 'observations', 'status',
-            'treatment_agent', 'documents', 'convention', 'slip'
+            'id', 'submit_date', 'user', 'status', 'amount_requested',
+            'amount_awarded', 'amount_to_repay', 'monthly_payment_number',
+            'quota', 'withholding', 'proceed_date', 'post_reference',
+            'category', 'observations', 'status', 'treatment_agent',
+            'documents', 'convention', 'slip'
         ]
 
     def create(self, validate_data):
