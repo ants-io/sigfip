@@ -116,10 +116,10 @@ class UserSerializer(serializers.ModelSerializer):
 
         model = models.User
         fields = [
-            'id', 'first_name', 'last_name', 'birth_date', 'birth_place',
-            'sex', 'registration_number', 'registration_date', 'cni', 'salary',
-            'address', 'postal_box', 'phone', 'grade', 'ministry',
-            'paying_org', 'age', 'retirement_age',
+            'id', 'username', 'first_name', 'last_name', 'birth_date',
+            'birth_place', 'sex', 'registration_number', 'registration_date',
+            'cni', 'salary', 'address', 'postal_box', 'phone', 'grade',
+            'ministry', 'paying_org', 'age', 'retirement_age',
             'last_loan_remaining_months', 'last_loan_required_months',
             'latest_loan', 'loans'
         ]
@@ -133,8 +133,8 @@ class SmallUserSerializer(serializers.ModelSerializer):
 
         model = models.User
         fields = [
-            'id', 'first_name', 'last_name', 'grade', 'registration_number',
-            'latest_loan'
+            'id', 'username', 'first_name', 'last_name', 'grade',
+            'registration_number', 'latest_loan'
         ]
 
 
@@ -144,6 +144,7 @@ class ExtraSmallUserSerializer(serializers.ModelSerializer):
         model = models.User
         fields = [
             'id',
+            'username',
             'first_name',
             'last_name',
             'registration_number',
@@ -159,11 +160,11 @@ class LoanSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Request
         fields = [
-            'id', 'submit_date', 'user', 'status', 'amount_requested',
-            'amount_awarded', 'amount_to_repay', 'monthly_payment_number',
-            'quota', 'withholding', 'proceed_date', 'post_reference',
-            'category', 'observations', 'status', 'treatment_agent',
-            'documents', 'convention', 'slip'
+            'id', 'username', 'submit_date', 'user', 'status',
+            'amount_requested', 'amount_awarded', 'amount_to_repay',
+            'monthly_payment_number', 'quota', 'withholding', 'proceed_date',
+            'post_reference', 'category', 'observations', 'status',
+            'treatment_agent', 'documents', 'convention', 'slip'
         ]
 
     def create(self, validate_data):
