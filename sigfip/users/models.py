@@ -272,7 +272,11 @@ class Request(TimeStampedField):
         return self.document_set.all()
 
     @property
-    def loan_file(self):
+    def doc_category(self):
+        return self.category
+
+    @property
+    def state(self):
         documents = self.document_set.all()
         for doc in documents:
             if doc.provided_number < doc.document_category.required_number:

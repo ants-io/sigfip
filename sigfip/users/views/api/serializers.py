@@ -57,6 +57,13 @@ class RequestCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class SmallRequestCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+
+        model = models.RequestCategory
+        fields = ['id', 'name']
+
+
 class GradeSerializer(serializers.ModelSerializer):
     corps = CorpsSerializer(many=False, read_only=True)
 
@@ -90,7 +97,7 @@ class ExtraSmallLoanSerializer(serializers.ModelSerializer):
 
 
 class SmallLoanSerializer(serializers.ModelSerializer):
-    category = RequestCategorySerializer(many=False, read_only=True)
+    doc_category = SmallRequestCategorySerializer(many=False, read_only=True)
 
     class Meta:
         model = models.Request
@@ -101,7 +108,8 @@ class SmallLoanSerializer(serializers.ModelSerializer):
             'amount_awarded',
             'amount_requested',
             'monthly_payment_number',
-            'category',
+            'doc_category',
+            'state',
         ]
 
 
@@ -134,7 +142,7 @@ class SmallUserSerializer(serializers.ModelSerializer):
         model = models.User
         fields = [
             'id', 'username', 'first_name', 'last_name', 'grade',
-            'registration_number', 'latest_loan'
+            'registration_number', 'latest_loan', 'salary'
         ]
 
 
@@ -153,18 +161,34 @@ class ExtraSmallUserSerializer(serializers.ModelSerializer):
 
 class LoanSerializer(serializers.ModelSerializer):
     user = SmallUserSerializer(many=False, read_only=True)
-    treatment_agent = UserSerializer(many=False, read_only=True)
-    # category = RequestCategorySerializer(many=False, read_only=True)
+    treatment_agent = SmallUserSerializer(many=False, read_only=True)
+    doc_category = RequestCategorySerializer(many=False, read_only=True)
     documents = DocumentSerializer(many=True, read_only=True)
 
     class Meta:
         model = models.Request
         fields = [
-            'id', 'submit_date', 'user', 'status', 'amount_requested',
-            'amount_awarded', 'amount_to_repay', 'monthly_payment_number',
-            'quota', 'withholding', 'proceed_date', 'post_reference',
-            'category', 'observations', 'status', 'treatment_agent',
-            'documents', 'convention', 'slip'
+            'id',
+            'submit_date',
+            'user',
+            'status',
+            'amount_requested',
+            'amount_awarded',
+            'amount_to_repay',
+            'monthly_payment_number',
+            'quota',
+            'withholding',
+            'proceed_date',
+            'post_reference',
+            'category',
+            'doc_category',
+            'observations',
+            'status',
+            'treatment_agent',
+            'documents',
+            'convention',
+            'slip',
+            'state',
         ]
 
     def create(self, validate_data):
@@ -174,17 +198,13 @@ class LoanSerializer(serializers.ModelSerializer):
         provided_numbers = []
         references = []
         document_dates = []
+
         if form.is_valid():
             model = form.save(commit=False)
+
             if not model.monthly_payment_number:
-                line = models.PrepaymentTable.objects.get(
-                    loan_amount=model.amount_requested)
-                if model.user.salary < line.minimal_salary:
-                    return {
-                        "error":
-                        "INFO: Le salaire minimal authorisé pour ce prêt est de {line.minimal_salary} F CFA."
-                    }
                 model.monthly_payment_number = line.duration * 12
+
             model.amount_awarded = model.amount_requested
             model.amount_to_repay = model.amount_awarded
             model.quota = model.user.salary / 3
@@ -214,6 +234,7 @@ class LoanSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         data = self.context.get('request').data
         form = forms.LoanDetailForm(data, instance=instance)
+        print({'form_is_valid ?': form.errors})
         if form.is_valid():
             form.save()
 
