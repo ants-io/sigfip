@@ -11,12 +11,10 @@ class DocumentCategorySerializer(serializers.ModelSerializer):
 
 
 class LoadRequestCategorySerializer(serializers.ModelSerializer):
-    documents = DocumentCategorySerializer(many=True, read_only=True)
-
     class Meta:
 
         model = models.RequestCategory
-        fields = ['id', 'name', 'documents']
+        fields = ['id', 'name', 'description', 'documents']
 
 
 class PrepaymentTableSerializer(serializers.ModelSerializer):
@@ -73,6 +71,13 @@ class GradeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ProfessionSerializer(serializers.ModelSerializer):
+    class Meta:
+
+        model = models.Profession
+        fields = '__all__'
+
+
 class DocumentSerializer(serializers.ModelSerializer):
 
     document_category = DocumentCategorySerializer(many=False, read_only=True)
@@ -114,10 +119,11 @@ class SmallLoanSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    grade = GradeSerializer(many=False, read_only=True)
+    # grade = GradeSerializer(many=False, read_only=True)
+    # ministry = MinistrySerializer(many=False, read_only=True)
+    # paying_org = PayingOrgSerializer(many=False, read_only=True)
+    # profession = ProfessionSerializer(many=True, read_only=True)
     latest_loan = SmallLoanSerializer(many=False, read_only=True)
-    ministry = MinistrySerializer(many=False, read_only=True)
-    paying_org = PayingOrgSerializer(many=False, read_only=True)
     loans = SmallLoanSerializer(many=True, read_only=True)
 
     class Meta:
@@ -129,7 +135,7 @@ class UserSerializer(serializers.ModelSerializer):
             'cni', 'salary', 'address', 'postal_box', 'phone', 'grade',
             'ministry', 'paying_org', 'age', 'retirement_age',
             'last_loan_remaining_months', 'last_loan_required_months',
-            'latest_loan', 'loans'
+            'latest_loan', 'loans', 'profession'
         ]
 
 

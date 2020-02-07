@@ -23,7 +23,7 @@ class UserAdmin(auth_admin.UserAdmin):
     }), ) + auth_admin.UserAdmin.fieldsets
     list_display = [
         "username", "first_name", "last_name", "profession", "grade",
-        "is_superuser"
+        "is_superuser", "ministry"
     ]
     search_fields = ["first_name", "last_name", "email"]
 
@@ -67,4 +67,9 @@ class DocumentCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(models.RequestCategory)
 class RequestCategoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'description']
+
+
+@admin.register(models.Ministry)
+class MinistryAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'description']
