@@ -130,7 +130,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         model = models.User
         fields = [
-            'id', 'username', 'first_name', 'last_name', 'birth_date',
+            'id', 'username', 'first_name', 'last_name', 'email', 'birth_date',
             'birth_place', 'sex', 'registration_number', 'registration_date',
             'cni', 'salary', 'address', 'postal_box', 'phone', 'grade',
             'ministry', 'paying_org', 'age', 'retirement_age',
